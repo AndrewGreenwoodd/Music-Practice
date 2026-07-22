@@ -1,0 +1,1 @@
+ALTER TABLE `items` ADD `long_description` text;
