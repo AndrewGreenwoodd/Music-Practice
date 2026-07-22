@@ -1,20 +1,9 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { format } from "date-fns";
 import { auth } from "@/lib/auth";
 import { getItemDetail } from "@/db/queries/items";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { ItemStatusSelect } from "@/components/items/item-status-select";
-import { BpmLogForm } from "@/components/items/bpm-log-form";
-import { BpmChart } from "@/components/items/bpm-chart";
 import { LongDescription } from "@/components/theory/long-description";
 
 export default async function ItemDetailPage({
@@ -32,12 +21,8 @@ export default async function ItemDetailPage({
   const data = await getItemDetail(itemIdNum, session.user.id);
   if (!data) notFound();
 
-  const { item, status, bpmHistory, recentSessions } = data;
+  const { item, status, recentSessions } = data;
   const phase = item.category.phase;
-
-  const chartData = [...bpmHistory]
-    .reverse()
-    .map((log) => ({ date: format(log.recordedAt, "MMM d"), bpm: log.bpm }));
 
   return (
     <div className="space-y-6">
@@ -67,41 +52,6 @@ export default async function ItemDetailPage({
           </CardContent>
         </Card>
       )}
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Metronome BPM history</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <BpmLogForm itemId={item.id} />
-
-          {bpmHistory.length > 0 ? (
-            <>
-              <BpmChart data={chartData} />
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>BPM</TableHead>
-                    <TableHead>Note</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {bpmHistory.map((log) => (
-                    <TableRow key={log.id}>
-                      <TableCell>{format(log.recordedAt, "MMM d, yyyy")}</TableCell>
-                      <TableCell>{log.bpm}</TableCell>
-                      <TableCell className="text-muted-foreground">{log.note}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </>
-          ) : (
-            <p className="text-sm text-muted-foreground">No BPM logged yet.</p>
-          )}
-        </CardContent>
-      </Card>
 
       {recentSessions.length > 0 && (
         <Card>

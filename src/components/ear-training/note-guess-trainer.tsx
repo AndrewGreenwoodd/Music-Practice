@@ -137,7 +137,7 @@ export function NoteGuessTrainer() {
                 }}
               >
                 <SelectTrigger className="w-28">
-                  <SelectValue />
+                  <SelectValue>{(value: string) => `${value} major`}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {NOTE_NAMES.map((n) => (

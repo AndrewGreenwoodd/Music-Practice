@@ -169,32 +169,6 @@ export const itemProgress = sqliteTable(
   (table) => [unique().on(table.userId, table.itemId)],
 );
 
-export const bpmLogs = sqliteTable(
-  "bpm_logs",
-  {
-    id: integer("id").primaryKey({ autoIncrement: true }),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    itemId: integer("item_id")
-      .notNull()
-      .references(() => items.id, { onDelete: "cascade" }),
-    sessionId: integer("session_id").references(() => practiceSessions.id, {
-      onDelete: "set null",
-    }),
-    bpm: integer("bpm").notNull(),
-    recordedAt: integer("recorded_at", { mode: "timestamp" })
-      .notNull()
-      .default(sql`(unixepoch())`),
-    note: text("note"),
-  },
-  (table) => [index("bpm_logs_user_item_recorded_idx").on(
-    table.userId,
-    table.itemId,
-    table.recordedAt,
-  )],
-);
-
 export const earTrainingRounds = sqliteTable(
   "ear_training_rounds",
   {
@@ -221,7 +195,6 @@ export const usersRelations = relations(users, ({ many }) => ({
   planProgress: many(userPlanProgress),
   practiceSessions: many(practiceSessions),
   itemProgress: many(itemProgress),
-  bpmLogs: many(bpmLogs),
   earTrainingRounds: many(earTrainingRounds),
 }));
 
@@ -267,7 +240,6 @@ export const itemsRelations = relations(items, ({ one, many }) => ({
   }),
   sessionLinks: many(practiceSessionItems),
   progress: many(itemProgress),
-  bpmLogs: many(bpmLogs),
 }));
 
 export const userPlanProgressRelations = relations(userPlanProgress, ({ one }) => ({
@@ -287,7 +259,6 @@ export const practiceSessionsRelations = relations(
       references: [users.id],
     }),
     items: many(practiceSessionItems),
-    bpmLogs: many(bpmLogs),
   }),
 );
 
@@ -308,13 +279,4 @@ export const practiceSessionItemsRelations = relations(
 export const itemProgressRelations = relations(itemProgress, ({ one }) => ({
   user: one(users, { fields: [itemProgress.userId], references: [users.id] }),
   item: one(items, { fields: [itemProgress.itemId], references: [items.id] }),
-}));
-
-export const bpmLogsRelations = relations(bpmLogs, ({ one }) => ({
-  user: one(users, { fields: [bpmLogs.userId], references: [users.id] }),
-  item: one(items, { fields: [bpmLogs.itemId], references: [items.id] }),
-  session: one(practiceSessions, {
-    fields: [bpmLogs.sessionId],
-    references: [practiceSessions.id],
-  }),
 }));

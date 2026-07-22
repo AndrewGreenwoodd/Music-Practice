@@ -35,7 +35,7 @@ export function ItemStatusSelect({
       }}
     >
       <SelectTrigger className="w-40">
-        <SelectValue />
+        <SelectValue>{(value: ItemStatus) => LABELS[value] ?? value}</SelectValue>
       </SelectTrigger>
       <SelectContent>
         {(Object.keys(LABELS) as ItemStatus[]).map((key) => (
