@@ -12,6 +12,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { createSession } from "@/lib/actions/sessions";
+import type { Dictionary } from "@/i18n/dictionaries/en";
+import { getDateFnsLocale } from "@/i18n/date-locale";
+import type { Locale } from "@/i18n/config";
 
 type PhaseWithItems = {
   phase: { id: number; title: string; isOngoing: boolean };
@@ -21,10 +24,15 @@ type PhaseWithItems = {
 export function SessionForm({
   phases,
   currentPhaseId,
+  locale,
+  dict,
 }: {
   phases: PhaseWithItems[];
   currentPhaseId: number | null;
+  locale: Locale;
+  dict: Dictionary["sessionForm"];
 }) {
+  const dateFnsLocale = getDateFnsLocale(locale);
   const [date, setDate] = useState<Date>(new Date());
   const [duration, setDuration] = useState("30");
   const [selectedItemIds, setSelectedItemIds] = useState<Set<number>>(new Set());
@@ -52,7 +60,7 @@ export function SessionForm({
     setError(null);
     const durationNum = Number(duration);
     if (!durationNum || durationNum <= 0) {
-      setError("Enter a valid duration in minutes.");
+      setError(dict.durationError);
       return;
     }
     setIsSubmitting(true);
@@ -70,23 +78,28 @@ export function SessionForm({
     <form onSubmit={onSubmit} className="space-y-6">
       <div className="flex flex-wrap gap-4">
         <div className="space-y-1">
-          <Label>Date</Label>
+          <Label>{dict.date}</Label>
           <Popover>
             <PopoverTrigger
               render={
                 <Button type="button" variant="outline" className="w-40 justify-start">
                   <CalendarIcon className="mr-2 size-4" />
-                  {format(date, "MMM d, yyyy")}
+                  {format(date, "MMM d, yyyy", { locale: dateFnsLocale })}
                 </Button>
               }
             />
             <PopoverContent className="w-auto p-0">
-              <Calendar mode="single" selected={date} onSelect={(d) => d && setDate(d)} />
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={(d) => d && setDate(d)}
+                locale={dateFnsLocale}
+              />
             </PopoverContent>
           </Popover>
         </div>
         <div className="space-y-1">
-          <Label htmlFor="duration">Duration (min)</Label>
+          <Label htmlFor="duration">{dict.duration}</Label>
           <Input
             id="duration"
             type="number"
@@ -98,12 +111,12 @@ export function SessionForm({
       </div>
 
       <div className="space-y-2">
-        <Label>Items covered</Label>
+        <Label>{dict.itemsCovered}</Label>
         <Tabs defaultValue={defaultTab}>
           <TabsList>
             {phases.map((p) => (
               <TabsTrigger key={p.phase.id} value={String(p.phase.id)}>
-                {p.phase.isOngoing ? "Habits" : p.phase.title}
+                {p.phase.isOngoing ? dict.habits : p.phase.title}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -132,11 +145,11 @@ export function SessionForm({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1">
-          <Label htmlFor="win">One win</Label>
+          <Label htmlFor="win">{dict.oneWin}</Label>
           <Textarea id="win" value={win} onChange={(e) => setWin(e.target.value)} />
         </div>
         <div className="space-y-1">
-          <Label htmlFor="struggle">One struggle</Label>
+          <Label htmlFor="struggle">{dict.oneStruggle}</Label>
           <Textarea
             id="struggle"
             value={struggle}
@@ -145,13 +158,13 @@ export function SessionForm({
         </div>
       </div>
       <div className="space-y-1">
-        <Label htmlFor="notes">Notes</Label>
+        <Label htmlFor="notes">{dict.notes}</Label>
         <Textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
       <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Saving..." : "Log session"}
+        {isSubmitting ? dict.saving : dict.save}
       </Button>
     </form>
   );

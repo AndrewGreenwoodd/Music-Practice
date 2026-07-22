@@ -29,8 +29,7 @@ export async function setItemStatus(itemId: number, status: string) {
     await db.insert(itemProgress).values({ userId, itemId, status: parsedStatus });
   }
 
-  revalidatePath("/today");
-  revalidatePath("/phases");
+  revalidatePath("/practice");
   revalidatePath(`/items/${itemId}`);
 }
 
@@ -52,6 +51,5 @@ export async function setCurrentPhase(planId: number, phaseId: number) {
     await db.insert(userPlanProgress).values({ userId, planId, currentPhaseId: phaseId });
   }
 
-  revalidatePath("/today");
-  revalidatePath("/phases");
+  revalidatePath("/practice");
 }

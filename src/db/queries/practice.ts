@@ -1,6 +1,7 @@
 import { and, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { phases, userPlanProgress } from "@/db/schema";
+import type { Locale } from "@/i18n/config";
 import { getPhaseWithItems } from "./phases";
 
 export async function getCurrentPhaseId(userId: string, planId: number) {
@@ -18,8 +19,8 @@ export async function getCurrentPhaseId(userId: string, planId: number) {
   return firstPhase?.id ?? null;
 }
 
-export async function getTodayData(userId: string, planId: number) {
+export async function getPracticeData(userId: string, planId: number, locale: Locale) {
   const currentPhaseId = await getCurrentPhaseId(userId, planId);
   if (!currentPhaseId) return null;
-  return getPhaseWithItems(currentPhaseId, userId);
+  return getPhaseWithItems(currentPhaseId, userId, locale);
 }

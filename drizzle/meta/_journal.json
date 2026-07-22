@@ -29,6 +29,13 @@
       "when": 1784708020423,
       "tag": "0003_drop_bpm_logs",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1784714261873,
+      "tag": "0004_add_uk_translations",
+      "breakpoints": true
     }
   ]
 }

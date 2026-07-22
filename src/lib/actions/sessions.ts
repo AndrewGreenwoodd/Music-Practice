@@ -41,6 +41,6 @@ export async function createSession(input: z.infer<typeof sessionSchema>) {
   }
 
   revalidatePath("/sessions");
-  revalidatePath("/today");
+  revalidatePath("/practice");
   redirect("/sessions");
 }

@@ -30,7 +30,7 @@ export function PhaseSelector({
         if (value) startTransition(() => setCurrentPhase(planId, Number(value)));
       }}
     >
-      <SelectTrigger className="w-64">
+      <SelectTrigger className="min-w-64 max-w-full">
         <SelectValue>{(value: string) => titleById.get(value) ?? value}</SelectValue>
       </SelectTrigger>
       <SelectContent>

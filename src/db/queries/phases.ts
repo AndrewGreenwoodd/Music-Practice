@@ -1,22 +1,24 @@
 import { and, asc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db";
 import { categories, items, itemProgress, phases } from "@/db/schema";
+import type { Locale } from "@/i18n/config";
+import { localized } from "./localize";
 
-export async function listPhases(planId: number) {
-  return db.query.phases.findMany({
+export async function listPhases(planId: number, locale: Locale) {
+  const rows = await db.query.phases.findMany({
     where: and(eq(phases.planId, planId), eq(phases.isOngoing, false)),
     orderBy: asc(phases.orderIndex),
     with: { milestone: true },
   });
+
+  return rows.map((phase) => ({
+    ...phase,
+    title: localized(phase.title, phase.titleUk, locale),
+    goal: localized(phase.goal, phase.goalUk, locale),
+  }));
 }
 
-export async function getOngoingPhase(planId: number) {
-  return db.query.phases.findFirst({
-    where: and(eq(phases.planId, planId), eq(phases.isOngoing, true)),
-  });
-}
-
-export async function getPhaseWithItems(phaseId: number, userId: string) {
+export async function getPhaseWithItems(phaseId: number, userId: string, locale: Locale) {
   const phase = await db.query.phases.findFirst({
     where: eq(phases.id, phaseId),
     with: { milestone: true },
@@ -41,8 +43,13 @@ export async function getPhaseWithItems(phaseId: number, userId: string) {
 
   const categoriesWithStatus = phaseCategories.map((category) => ({
     ...category,
+    name: localized(category.name, category.nameUk, locale),
     items: category.items.map((item) => ({
       ...item,
+      title: localized(item.title, item.titleUk, locale),
+      description: item.description
+        ? localized(item.description, item.descriptionUk, locale)
+        : item.description,
       status: progressByItemId.get(item.id) ?? ("not_started" as const),
     })),
   }));
@@ -51,35 +58,12 @@ export async function getPhaseWithItems(phaseId: number, userId: string) {
   const doneItems = progressRows.filter((p) => p.status === "done").length;
 
   return {
-    phase,
+    phase: {
+      ...phase,
+      title: localized(phase.title, phase.titleUk, locale),
+      goal: localized(phase.goal, phase.goalUk, locale),
+    },
     categories: categoriesWithStatus,
     progress: { total: totalItems, done: doneItems },
   };
-}
-
-export async function listPhaseSummaries(planId: number, userId: string) {
-  const phaseList = await listPhases(planId);
-
-  const summaries = await Promise.all(
-    phaseList.map(async (phase) => {
-      const phaseCategories = await db.query.categories.findMany({
-        where: eq(categories.phaseId, phase.id),
-        with: { items: true },
-      });
-      const itemIds = phaseCategories.flatMap((c) => c.items.map((i) => i.id));
-      const progressRows = itemIds.length
-        ? await db.query.itemProgress.findMany({
-            where: and(
-              eq(itemProgress.userId, userId),
-              inArray(itemProgress.itemId, itemIds),
-            ),
-          })
-        : [];
-      const done = progressRows.filter((p) => p.status === "done").length;
-
-      return { phase, total: itemIds.length, done };
-    }),
-  );
-
-  return summaries;
 }

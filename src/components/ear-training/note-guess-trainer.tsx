@@ -22,6 +22,7 @@ import {
 } from "@/lib/music";
 import { playTone } from "@/lib/audio";
 import { recordEarTrainingRound } from "@/lib/actions/ear-training";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 type Mode = "note" | "scale_degree";
 type Round = { noteIndex: number; correctAnswer: string };
@@ -29,7 +30,7 @@ type Round = { noteIndex: number; correctAnswer: string };
 const DEGREES = ["1", "2", "3", "4", "5", "6", "7"];
 const OCTAVE = 4;
 
-export function NoteGuessTrainer() {
+export function NoteGuessTrainer({ dict }: { dict: Dictionary["earTraining"] }) {
   const [mode, setMode] = useState<Mode>("note");
   const [scaleRoot, setScaleRoot] = useState<NoteName>("C");
   const [round, setRound] = useState<Round | null>(null);
@@ -88,16 +89,16 @@ export function NoteGuessTrainer() {
     <Card>
       <CardHeader>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <CardTitle className="text-base">Note Guess</CardTitle>
+          <CardTitle className="text-base">{dict.trainerTitle}</CardTitle>
           <Badge variant="secondary">
-            {score.correct} / {score.total} this session
+            {score.correct} / {score.total} {dict.sessionScore}
           </Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-5">
         <div className="flex flex-wrap items-end gap-4">
           <div className="space-y-1.5">
-            <p className="text-sm font-medium">Mode</p>
+            <p className="text-sm font-medium">{dict.mode}</p>
             <div className="flex gap-2">
               <Button
                 type="button"
@@ -108,7 +109,7 @@ export function NoteGuessTrainer() {
                   resetRound();
                 }}
               >
-                Guess the note
+                {dict.guessNote}
               </Button>
               <Button
                 type="button"
@@ -119,14 +120,14 @@ export function NoteGuessTrainer() {
                   resetRound();
                 }}
               >
-                Guess the scale degree
+                {dict.guessDegree}
               </Button>
             </div>
           </div>
 
           {mode === "scale_degree" && (
             <div className="space-y-1.5">
-              <p className="text-sm font-medium">Key</p>
+              <p className="text-sm font-medium">{dict.key}</p>
               <Select
                 value={scaleRoot}
                 onValueChange={(value) => {
@@ -137,12 +138,12 @@ export function NoteGuessTrainer() {
                 }}
               >
                 <SelectTrigger className="w-28">
-                  <SelectValue>{(value: string) => `${value} major`}</SelectValue>
+                  <SelectValue>{(value: string) => `${value} ${dict.major}`}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {NOTE_NAMES.map((n) => (
                     <SelectItem key={n} value={n}>
-                      {n} major
+                      {n} {dict.major}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -154,11 +155,11 @@ export function NoteGuessTrainer() {
         <div className="flex items-center gap-3">
           <Button type="button" onClick={startRound}>
             <Volume2 className="mr-1.5 size-4" />
-            {round ? "New note" : "Play a note"}
+            {round ? dict.newNote : dict.playNote}
           </Button>
           {round && (
             <Button type="button" variant="outline" onClick={replay}>
-              Replay
+              {dict.replay}
             </Button>
           )}
         </div>
@@ -191,10 +192,10 @@ export function NoteGuessTrainer() {
             {selectedAnswer && (
               <p className="text-sm text-muted-foreground">
                 {selectedAnswer === round.correctAnswer
-                  ? "Correct!"
-                  : `Not quite — that was ${round.correctAnswer}.`}{" "}
+                  ? dict.correct
+                  : dict.incorrect.replace("{answer}", round.correctAnswer)}{" "}
                 <button type="button" onClick={startRound} className="underline">
-                  Next note
+                  {dict.nextNote}
                 </button>
               </p>
             )}

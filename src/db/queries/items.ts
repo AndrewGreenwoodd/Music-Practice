@@ -1,8 +1,10 @@
-import { and, desc, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "@/db";
-import { itemProgress, items, practiceSessionItems } from "@/db/schema";
+import { items } from "@/db/schema";
+import type { Locale } from "@/i18n/config";
+import { localized } from "./localize";
 
-export async function getItemDetail(itemId: number, userId: string) {
+export async function getItemDetail(itemId: number, locale: Locale) {
   const item = await db.query.items.findFirst({
     where: eq(items.id, itemId),
     with: {
@@ -11,23 +13,24 @@ export async function getItemDetail(itemId: number, userId: string) {
   });
   if (!item) return null;
 
-  const progress = await db.query.itemProgress.findFirst({
-    where: and(eq(itemProgress.userId, userId), eq(itemProgress.itemId, itemId)),
-  });
-
-  const recentSessionLinks = await db.query.practiceSessionItems.findMany({
-    where: eq(practiceSessionItems.itemId, itemId),
-    with: { session: true },
-    orderBy: desc(practiceSessionItems.id),
-    limit: 10,
-  });
-  const recentSessions = recentSessionLinks
-    .map((link) => link.session)
-    .filter((session) => session.userId === userId);
-
   return {
-    item,
-    status: progress?.status ?? ("not_started" as const),
-    recentSessions,
+    item: {
+      ...item,
+      title: localized(item.title, item.titleUk, locale),
+      description: item.description
+        ? localized(item.description, item.descriptionUk, locale)
+        : item.description,
+      longDescription: item.longDescription
+        ? localized(item.longDescription, item.longDescriptionUk, locale)
+        : item.longDescription,
+      category: {
+        ...item.category,
+        name: localized(item.category.name, item.category.nameUk, locale),
+        phase: {
+          ...item.category.phase,
+          title: localized(item.category.phase.title, item.category.phase.titleUk, locale),
+        },
+      },
+    },
   };
 }

@@ -23,6 +23,7 @@ export const instruments = sqliteTable("instruments", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   slug: text("slug").notNull().unique(),
   name: text("name").notNull(),
+  nameUk: text("name_uk"),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
@@ -34,7 +35,9 @@ export const plans = sqliteTable("plans", {
     .notNull()
     .references(() => instruments.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
+  titleUk: text("title_uk"),
   description: text("description"),
+  descriptionUk: text("description_uk"),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
@@ -52,7 +55,9 @@ export const phases = sqliteTable(
       .notNull()
       .default(false),
     title: text("title").notNull(),
+    titleUk: text("title_uk"),
     goal: text("goal").notNull(),
+    goalUk: text("goal_uk"),
     durationLabel: text("duration_label"),
   },
   (table) => [unique().on(table.planId, table.orderIndex)],
@@ -76,6 +81,7 @@ export const categories = sqliteTable(
       .references(() => phases.id, { onDelete: "cascade" }),
     slug: text("slug").notNull(),
     name: text("name").notNull(),
+    nameUk: text("name_uk"),
     orderIndex: integer("order_index").notNull(),
     dailyMinMinutes: integer("daily_min_minutes"),
     dailyMaxMinutes: integer("daily_max_minutes"),
@@ -91,8 +97,11 @@ export const items = sqliteTable(
       .notNull()
       .references(() => categories.id, { onDelete: "cascade" }),
     title: text("title").notNull(),
+    titleUk: text("title_uk"),
     description: text("description"),
+    descriptionUk: text("description_uk"),
     longDescription: text("long_description"),
+    longDescriptionUk: text("long_description_uk"),
     orderIndex: integer("order_index").notNull(),
   },
   (table) => [unique().on(table.categoryId, table.title)],

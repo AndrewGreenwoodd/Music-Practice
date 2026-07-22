@@ -13,9 +13,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { getLocale } from "@/i18n/get-locale";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { getDateFnsLocale } from "@/i18n/date-locale";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
-function accuracyLabel(correct: number, total: number) {
-  if (total === 0) return "No rounds yet";
+function accuracyLabel(correct: number, total: number, dict: Dictionary["earTraining"]) {
+  if (total === 0) return dict.noRoundsYet;
   return `${correct} / ${total} (${Math.round((correct / total) * 100)}%)`;
 }
 
@@ -23,32 +27,34 @@ export default async function EarTrainingPage() {
   const session = await auth();
   if (!session?.user?.id) redirect("/login");
 
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+  const dateFnsLocale = getDateFnsLocale(locale);
+
   const stats = await getEarTrainingStats(session.user.id);
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold">Ear Training</h1>
-        <p className="text-sm text-muted-foreground">
-          A random note plays — guess the note name or the scale degree.
-        </p>
+        <h1 className="text-2xl font-semibold">{dict.earTraining.title}</h1>
+        <p className="text-sm text-muted-foreground">{dict.earTraining.subtitle}</p>
       </div>
 
-      <NoteGuessTrainer />
+      <NoteGuessTrainer dict={dict.earTraining} />
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Lifetime accuracy</CardTitle>
+          <CardTitle className="text-base">{dict.earTraining.lifetimeAccuracy}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-wrap gap-6 text-sm">
             <p>
-              <span className="text-muted-foreground">Note guessing: </span>
-              {accuracyLabel(stats.note.correct, stats.note.total)}
+              <span className="text-muted-foreground">{dict.earTraining.noteGuessing} </span>
+              {accuracyLabel(stats.note.correct, stats.note.total, dict.earTraining)}
             </p>
             <p>
-              <span className="text-muted-foreground">Scale degree: </span>
-              {accuracyLabel(stats.scaleDegree.correct, stats.scaleDegree.total)}
+              <span className="text-muted-foreground">{dict.earTraining.scaleDegree} </span>
+              {accuracyLabel(stats.scaleDegree.correct, stats.scaleDegree.total, dict.earTraining)}
             </p>
           </div>
 
@@ -56,29 +62,34 @@ export default async function EarTrainingPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Mode</TableHead>
-                  <TableHead>Your answer</TableHead>
-                  <TableHead>Correct answer</TableHead>
-                  <TableHead>Result</TableHead>
+                  <TableHead>{dict.earTraining.tableDate}</TableHead>
+                  <TableHead>{dict.earTraining.tableMode}</TableHead>
+                  <TableHead>{dict.earTraining.tableYourAnswer}</TableHead>
+                  <TableHead>{dict.earTraining.tableCorrectAnswer}</TableHead>
+                  <TableHead>{dict.earTraining.tableResult}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {stats.recent.map((round) => (
                   <TableRow key={round.id}>
-                    <TableCell>{format(round.createdAt, "MMM d, HH:mm")}</TableCell>
+                    <TableCell>
+                      {format(round.createdAt, "MMM d, HH:mm", { locale: dateFnsLocale })}
+                    </TableCell>
                     <TableCell>
                       {round.mode === "note"
-                        ? "Note"
-                        : `Scale degree (${round.scaleRoot} major)`}
+                        ? dict.earTraining.modeNote
+                        : dict.earTraining.modeScaleDegree.replace(
+                            "{root}",
+                            round.scaleRoot ?? "",
+                          )}
                     </TableCell>
                     <TableCell>{round.userAnswer}</TableCell>
                     <TableCell>{round.correctAnswer}</TableCell>
                     <TableCell>
                       {round.isCorrect ? (
-                        <Badge variant="secondary">Correct</Badge>
+                        <Badge variant="secondary">{dict.earTraining.resultCorrect}</Badge>
                       ) : (
-                        <Badge variant="destructive">Missed</Badge>
+                        <Badge variant="destructive">{dict.earTraining.resultMissed}</Badge>
                       )}
                     </TableCell>
                   </TableRow>

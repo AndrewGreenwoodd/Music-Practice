@@ -11,7 +11,7 @@ export const authConfig: NextAuthConfig = {
 
       if (isOnLogin) {
         if (isLoggedIn) {
-          return Response.redirect(new URL("/today", request.nextUrl));
+          return Response.redirect(new URL("/practice", request.nextUrl));
         }
         return true;
       }
