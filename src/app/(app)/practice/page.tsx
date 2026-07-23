@@ -7,7 +7,7 @@ import { listPhases } from "@/db/queries/phases";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ItemStatusCheckbox } from "@/components/items/item-status-checkbox";
+import { ItemChecklistRow } from "@/components/items/item-checklist-row";
 import { PhaseSelector } from "@/components/phases/phase-selector";
 import { getLocale } from "@/i18n/get-locale";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -76,20 +76,13 @@ export default async function PracticePage() {
             </CardHeader>
             <CardContent className="space-y-3">
               {category.items.map((item) => (
-                <div key={item.id} className="flex items-start gap-3">
-                  <ItemStatusCheckbox itemId={item.id} status={item.status} />
-                  <div className="min-w-0">
-                    <Link
-                      href={`/items/${item.id}`}
-                      className="text-sm font-medium hover:underline"
-                    >
-                      {item.title}
-                    </Link>
-                    {item.description && (
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
-                    )}
-                  </div>
-                </div>
+                <ItemChecklistRow
+                  key={item.id}
+                  itemId={item.id}
+                  title={item.title}
+                  description={item.description}
+                  status={item.status}
+                />
               ))}
             </CardContent>
           </Card>
