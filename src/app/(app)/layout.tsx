@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { SignOutButton } from "@/components/layout/sign-out-button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
@@ -7,6 +8,12 @@ import { getLocale } from "@/i18n/get-locale";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { MusicNoteIcon } from "@/components/icons/music-note-icon";
 import { MetronomeWidget } from "@/components/metronome/metronome-widget";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default async function AppLayout({
   children,
@@ -20,8 +27,13 @@ export default async function AppLayout({
     { href: "/practice", label: dict.nav.practice },
     { href: "/theory", label: dict.nav.theory },
     { href: "/sessions", label: dict.nav.history },
-    { href: "/ear-training", label: dict.nav.earTraining },
     { href: "/plans", label: dict.nav.managePlans },
+  ];
+
+  const extraLinks = [
+    { href: "/ear-training", label: dict.nav.earTraining },
+    { href: "/sheet-reading", label: dict.nav.sheetReading },
+    { href: "/famous-licks", label: dict.nav.famousLicks },
   ];
 
   return (
@@ -41,6 +53,19 @@ export default async function AppLayout({
                 {link.label}
               </Link>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-muted-foreground outline-none hover:text-foreground data-popup-open:text-foreground">
+                {dict.nav.extra}
+                <ChevronDown className="size-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {extraLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} render={<Link href={link.href} />}>
+                    {link.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
           <div className="flex items-center gap-3">
             {session?.user?.username && (
