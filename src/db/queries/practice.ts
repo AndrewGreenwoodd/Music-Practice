@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { phases, userPlanProgress } from "@/db/schema";
 import type { Locale } from "@/i18n/config";
@@ -14,7 +14,8 @@ export async function getCurrentPhaseId(userId: string, planId: number) {
   if (progress?.currentPhaseId) return progress.currentPhaseId;
 
   const firstPhase = await db.query.phases.findFirst({
-    where: and(eq(phases.planId, planId), eq(phases.orderIndex, 1)),
+    where: and(eq(phases.planId, planId), eq(phases.isOngoing, false)),
+    orderBy: asc(phases.orderIndex),
   });
   return firstPhase?.id ?? null;
 }

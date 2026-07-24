@@ -1,6 +1,6 @@
 let audioContext: AudioContext | null = null;
 
-function getAudioContext(): AudioContext {
+export function getAudioContext(): AudioContext {
   if (!audioContext) {
     audioContext = new AudioContext();
   }
@@ -27,4 +27,21 @@ export function playTone(frequency: number, durationMs = 900) {
   oscillator.connect(gain).connect(ctx.destination);
   oscillator.start(now);
   oscillator.stop(now + durationSec + 0.05);
+}
+
+export function scheduleClick(time: number, accent: boolean) {
+  const ctx = getAudioContext();
+  const oscillator = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  oscillator.type = "square";
+  oscillator.frequency.value = accent ? 1500 : 1000;
+
+  gain.gain.setValueAtTime(0.0001, time);
+  gain.gain.exponentialRampToValueAtTime(accent ? 0.6 : 0.4, time + 0.001);
+  gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.03);
+
+  oscillator.connect(gain).connect(ctx.destination);
+  oscillator.start(time);
+  oscillator.stop(time + 0.04);
 }

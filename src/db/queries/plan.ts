@@ -1,29 +1,20 @@
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
-import { instruments, plans } from "@/db/schema";
+import { instruments, plans, users } from "@/db/schema";
 import type { Locale } from "@/i18n/config";
 import { localized } from "./localize";
 
-/**
- * MVP only seeds a single instrument/plan (guitar). This is the one place
- * that assumption lives, so adding a second instrument later means adding
- * a picker here instead of touching every page.
- */
-export async function getActivePlan(locale: Locale) {
-  const instrument = await db.query.instruments.findFirst({
-    where: eq(instruments.slug, "guitar"),
-  });
-  if (!instrument) return null;
-
+async function loadPlanWithInstrument(planId: number, locale: Locale) {
   const plan = await db.query.plans.findFirst({
-    where: eq(plans.instrumentId, instrument.id),
+    where: eq(plans.id, planId),
+    with: { instrument: true },
   });
   if (!plan) return null;
 
   return {
     instrument: {
-      ...instrument,
-      name: localized(instrument.name, instrument.nameUk, locale),
+      ...plan.instrument,
+      name: localized(plan.instrument.name, plan.instrument.nameUk, locale),
     },
     plan: {
       ...plan,
@@ -33,4 +24,33 @@ export async function getActivePlan(locale: Locale) {
         : plan.description,
     },
   };
+}
+
+/**
+ * Resolves the user's active plan: whatever they've explicitly picked via
+ * `/plans` (users.activePlanId), or — if they haven't picked one yet — the
+ * originally-seeded guitar plan, so existing users see no change in behavior
+ * until they visit the plans page.
+ */
+export async function getActivePlan(userId: string, locale: Locale) {
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, userId),
+  });
+
+  if (user?.activePlanId) {
+    const active = await loadPlanWithInstrument(user.activePlanId, locale);
+    if (active) return active;
+  }
+
+  const instrument = await db.query.instruments.findFirst({
+    where: eq(instruments.slug, "guitar"),
+  });
+  if (!instrument) return null;
+
+  const fallbackPlan = await db.query.plans.findFirst({
+    where: eq(plans.instrumentId, instrument.id),
+  });
+  if (!fallbackPlan) return null;
+
+  return loadPlanWithInstrument(fallbackPlan.id, locale);
 }

@@ -1,9 +1,19 @@
-import NextAuth from "next-auth";
-import { authConfig } from "@/lib/auth.config";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { SESSION_COOKIE_NAME } from "@/lib/session-cookie";
 
-export const { auth: middleware } = NextAuth(authConfig);
+export default function proxy(request: NextRequest) {
+  const hasSession = request.cookies.has(SESSION_COOKIE_NAME);
+  const isLoginPage = request.nextUrl.pathname.startsWith("/login");
 
-export default middleware;
+  if (!hasSession && !isLoginPage) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+  if (hasSession && isLoginPage) {
+    return NextResponse.redirect(new URL("/practice", request.url));
+  }
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],

@@ -1,5 +1,6 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  type AnySQLiteColumn,
   index,
   integer,
   sqliteTable,
@@ -11,9 +12,12 @@ export const users = sqliteTable("users", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  email: text("email").notNull().unique(),
-  passwordHash: text("password_hash").notNull(),
+  username: text("username").notNull().unique(),
   name: text("name"),
+  activePlanId: integer("active_plan_id").references(
+    (): AnySQLiteColumn => plans.id,
+    { onDelete: "set null" },
+  ),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
@@ -34,10 +38,12 @@ export const plans = sqliteTable("plans", {
   instrumentId: integer("instrument_id")
     .notNull()
     .references(() => instruments.id, { onDelete: "cascade" }),
+  ownerId: text("owner_id").references(() => users.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
   titleUk: text("title_uk"),
   description: text("description"),
   descriptionUk: text("description_uk"),
+  sourceMarkdown: text("source_markdown"),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
@@ -200,11 +206,16 @@ export const earTrainingRounds = sqliteTable(
   ],
 );
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ one, many }) => ({
   planProgress: many(userPlanProgress),
   practiceSessions: many(practiceSessions),
   itemProgress: many(itemProgress),
   earTrainingRounds: many(earTrainingRounds),
+  ownedPlans: many(plans),
+  activePlan: one(plans, {
+    fields: [users.activePlanId],
+    references: [plans.id],
+  }),
 }));
 
 export const earTrainingRoundsRelations = relations(earTrainingRounds, ({ one }) => ({
@@ -219,6 +230,10 @@ export const plansRelations = relations(plans, ({ one, many }) => ({
   instrument: one(instruments, {
     fields: [plans.instrumentId],
     references: [instruments.id],
+  }),
+  owner: one(users, {
+    fields: [plans.ownerId],
+    references: [users.id],
   }),
   phases: many(phases),
   userProgress: many(userPlanProgress),

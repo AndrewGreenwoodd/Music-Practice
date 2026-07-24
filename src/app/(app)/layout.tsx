@@ -6,6 +6,7 @@ import { LanguageToggle } from "@/components/layout/language-toggle";
 import { getLocale } from "@/i18n/get-locale";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { MusicNoteIcon } from "@/components/icons/music-note-icon";
+import { MetronomeWidget } from "@/components/metronome/metronome-widget";
 
 export default async function AppLayout({
   children,
@@ -20,6 +21,7 @@ export default async function AppLayout({
     { href: "/theory", label: dict.nav.theory },
     { href: "/sessions", label: dict.nav.history },
     { href: "/ear-training", label: dict.nav.earTraining },
+    { href: "/plans", label: dict.nav.managePlans },
   ];
 
   return (
@@ -41,9 +43,9 @@ export default async function AppLayout({
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            {session?.user?.email && (
+            {session?.user?.username && (
               <span className="text-sm text-muted-foreground">
-                {session.user.email}
+                {session.user.username}
               </span>
             )}
             <LanguageToggle locale={locale} toggleLabel={dict.language.toggle} />
@@ -53,6 +55,7 @@ export default async function AppLayout({
         </div>
       </header>
       <main className="mx-auto w-full max-w-4xl flex-1 p-4">{children}</main>
+      <MetronomeWidget dict={dict.metronome} />
     </div>
   );
 }

@@ -19,7 +19,7 @@ export default async function PracticePage() {
   const locale = await getLocale();
   const dict = getDictionary(locale);
 
-  const active = await getActivePlan(locale);
+  const active = await getActivePlan(session.user.id, locale);
   if (!active) {
     return <p className="text-muted-foreground">{dict.practice.noPlan}</p>;
   }
