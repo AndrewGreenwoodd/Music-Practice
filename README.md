@@ -1,6 +1,6 @@
 # Music Practice
 
-A personal practice tracker for structured instrument-learning plans (guitar to start). Tracks a phased curriculum (technique / theory / applied / ear-training items per phase), lets you log practice sessions, and includes a note ear-training tool. Supports English and Ukrainian.
+A personal practice tracker for structured instrument-learning plans. Tracks a phased curriculum (technique / theory / applied / ear-training items per phase), lets you log practice sessions, and includes a note ear-training and sheet-reading practice tools. Supports English and Ukrainian.
 
 Local-only app: SQLite on disk, single machine, no external services required.
 
