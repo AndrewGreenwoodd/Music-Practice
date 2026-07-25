@@ -156,9 +156,12 @@ export const practiceSessionItems = sqliteTable("practice_session_items", {
   sessionId: integer("session_id")
     .notNull()
     .references(() => practiceSessions.id, { onDelete: "cascade" }),
-  itemId: integer("item_id")
-    .notNull()
-    .references(() => items.id, { onDelete: "cascade" }),
+  // Nullable + set-null (not cascade): if the item (or its whole plan) is later
+  // deleted, this historical session record should survive using the title
+  // snapshot below rather than disappearing along with the item.
+  itemId: integer("item_id").references(() => items.id, { onDelete: "set null" }),
+  itemTitle: text("item_title"),
+  itemTitleUk: text("item_title_uk"),
   note: text("note"),
 });
 

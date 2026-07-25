@@ -21,7 +21,7 @@ export default async function EditPlanPage({
   const locale = await getLocale();
   const dict = getDictionary(locale);
 
-  const plan = await getPlanForEdit(planIdNum, session.user.id);
+  const plan = await getPlanForEdit(planIdNum);
   if (!plan) notFound();
 
   return (
@@ -38,6 +38,7 @@ export default async function EditPlanPage({
         planId={plan.id}
         initialMarkdown={plan.sourceMarkdown}
         initialInstrumentName={plan.instrumentName}
+        isOwnedByUser={plan.ownerId === session.user.id}
         dict={dict.plans}
       />
     </div>

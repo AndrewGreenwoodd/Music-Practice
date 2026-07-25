@@ -14,12 +14,14 @@ export function PlanForm({
   planId,
   initialMarkdown = "",
   initialInstrumentName = "",
+  isOwnedByUser = true,
   dict,
 }: {
   mode: "create" | "edit";
   planId?: number;
   initialMarkdown?: string;
   initialInstrumentName?: string;
+  isOwnedByUser?: boolean;
   dict: Dictionary["plans"];
 }) {
   const router = useRouter();
@@ -112,6 +114,10 @@ export function PlanForm({
 
       {mode === "edit" && (
         <p className="text-sm text-muted-foreground">{dict.editResetsProgressNote}</p>
+      )}
+
+      {mode === "edit" && !isOwnedByUser && (
+        <p className="text-sm text-amber-600 dark:text-amber-500">{dict.editingSharedPlanNote}</p>
       )}
 
       {error && (

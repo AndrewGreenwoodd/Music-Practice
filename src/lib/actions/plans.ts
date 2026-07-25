@@ -1,6 +1,6 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { and, asc, eq, inArray, ne } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { db } from "@/db";
@@ -122,8 +122,8 @@ export async function updatePlan(
   if (!session?.user?.id) throw new Error("Not authenticated");
 
   const existing = await db.query.plans.findFirst({ where: eq(plans.id, planId) });
-  if (!existing || existing.ownerId !== session.user.id) {
-    throw new Error("Plan not found or not owned by the current user");
+  if (!existing) {
+    throw new Error("Plan not found");
   }
 
   const { markdown, instrumentName } = inputSchema.parse(input);
@@ -158,6 +158,8 @@ export async function updatePlan(
   revalidatePath("/theory");
 }
 
+const DEFAULT_FALLBACK_PLAN_TITLE = "Long-Term Guitar Practice Plan";
+
 export async function deletePlan(planId: number) {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Not authenticated");
@@ -167,11 +169,45 @@ export async function deletePlan(planId: number) {
     throw new Error("Plan not found or not owned by the current user");
   }
 
+  // Anyone with this plan set active would otherwise be left with no active
+  // plan at all (the FK just nulls it out on delete) -- fall back to the
+  // default guitar plan, or any other remaining plan, instead of leaving them
+  // stranded on an empty Practice/Theory page.
+  const affectedUsers = await db.query.users.findMany({
+    where: eq(users.activePlanId, planId),
+  });
+
+  let fallbackPlanId: number | null = null;
+  if (affectedUsers.length > 0) {
+    const fallback =
+      (await db.query.plans.findFirst({
+        where: and(eq(plans.title, DEFAULT_FALLBACK_PLAN_TITLE), ne(plans.id, planId)),
+      })) ??
+      (await db.query.plans.findFirst({
+        where: ne(plans.id, planId),
+        orderBy: asc(plans.createdAt),
+      }));
+    fallbackPlanId = fallback?.id ?? null;
+  }
+
   await db.delete(plans).where(eq(plans.id, planId));
+
+  if (affectedUsers.length > 0) {
+    await db
+      .update(users)
+      .set({ activePlanId: fallbackPlanId })
+      .where(
+        inArray(
+          users.id,
+          affectedUsers.map((u) => u.id),
+        ),
+      );
+  }
 
   revalidatePath("/plans");
   revalidatePath("/practice");
   revalidatePath("/theory");
+  revalidatePath("/", "layout");
 }
 
 export async function setActivePlan(planId: number) {

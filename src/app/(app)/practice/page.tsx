@@ -34,6 +34,12 @@ export default async function PracticePage() {
 
   const { phase, categories, progress } = data;
 
+  const doneItemIds = categories.flatMap((category) =>
+    category.items.filter((item) => item.status === "done").map((item) => item.id),
+  );
+  const logSessionHref =
+    doneItemIds.length > 0 ? `/sessions/new?items=${doneItemIds.join(",")}` : "/sessions/new";
+
   return (
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
@@ -48,7 +54,7 @@ export default async function PracticePage() {
           <PhaseSelector planId={active.plan.id} currentPhaseId={phase.id} phases={allPhases} />
           <Button
             nativeButton={false}
-            render={<Link href="/sessions/new">{dict.practice.logSession}</Link>}
+            render={<Link href={logSessionHref}>{dict.practice.logSession}</Link>}
           />
         </div>
       </div>

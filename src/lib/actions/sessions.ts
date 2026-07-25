@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { inArray } from "drizzle-orm";
 import { db } from "@/db";
-import { practiceSessionItems, practiceSessions } from "@/db/schema";
+import { items, practiceSessionItems, practiceSessions } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 const sessionSchema = z.object({
@@ -35,8 +36,20 @@ export async function createSession(input: z.infer<typeof sessionSchema>) {
     .returning();
 
   if (values.itemIds.length > 0) {
+    const coveredItems = await db.query.items.findMany({
+      where: inArray(items.id, values.itemIds),
+    });
+    const itemById = new Map(coveredItems.map((item) => [item.id, item]));
+
     await db.insert(practiceSessionItems).values(
-      values.itemIds.map((itemId) => ({ sessionId: created.id, itemId })),
+      values.itemIds.map((itemId) => ({
+        sessionId: created.id,
+        itemId,
+        // Snapshot the title so this session stays readable even if the item
+        // (or its whole plan) is deleted later.
+        itemTitle: itemById.get(itemId)?.title ?? null,
+        itemTitleUk: itemById.get(itemId)?.titleUk ?? null,
+      })),
     );
   }
 

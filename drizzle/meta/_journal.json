@@ -57,6 +57,13 @@
       "when": 1784876302589,
       "tag": "0007_users_username",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1784966465359,
+      "tag": "0008_add_session_item_snapshot",
+      "breakpoints": true
     }
   ]
 }

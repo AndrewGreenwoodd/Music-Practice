@@ -47,11 +47,17 @@ export default async function SessionsPage() {
               <CardContent className="space-y-2">
                 {s.items.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">
-                    {s.items.map((link) => (
-                      <Link key={link.id} href={`/items/${link.item.id}`}>
-                        <Badge variant="outline">{link.item.title}</Badge>
-                      </Link>
-                    ))}
+                    {s.items.map((link) =>
+                      link.item ? (
+                        <Link key={link.id} href={`/items/${link.item.id}`}>
+                          <Badge variant="outline">{link.title}</Badge>
+                        </Link>
+                      ) : (
+                        <Badge key={link.id} variant="outline" className="opacity-60">
+                          {link.title}
+                        </Badge>
+                      ),
+                    )}
                   </div>
                 )}
                 {s.win && (

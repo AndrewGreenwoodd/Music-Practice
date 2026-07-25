@@ -15,10 +15,14 @@ export async function listSessions(userId: string, locale: Locale) {
 
   return rows.map((session) => ({
     ...session,
-    items: session.items.map((link) => ({
-      ...link,
-      item: { ...link.item, title: localized(link.item.title, link.item.titleUk, locale) },
-    })),
+    items: session.items.map((link) => {
+      // Prefer the snapshot taken when the session was logged, so the entry
+      // stays meaningful even if the item (or its whole plan) was since deleted.
+      const title = link.item
+        ? localized(link.item.title, link.item.titleUk, locale)
+        : localized(link.itemTitle ?? "", link.itemTitleUk, locale);
+      return { ...link, title };
+    }),
   }));
 }
 

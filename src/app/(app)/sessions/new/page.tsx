@@ -7,7 +7,11 @@ import { SessionForm } from "@/components/sessions/session-form";
 import { getLocale } from "@/i18n/get-locale";
 import { getDictionary } from "@/i18n/get-dictionary";
 
-export default async function NewSessionPage() {
+export default async function NewSessionPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ items?: string }>;
+}) {
   const session = await auth();
   if (!session?.user?.id) redirect("/login");
 
@@ -19,11 +23,16 @@ export default async function NewSessionPage() {
     return <p className="text-muted-foreground">{dict.sessionForm.noPlan}</p>;
   }
 
-  const [phaseRows, currentPhaseId] = await Promise.all([
+  const [phaseRows, currentPhaseId, { items: itemsParam }] = await Promise.all([
     getSessionFormItems(active.plan.id, locale),
     getCurrentPhaseId(session.user.id, active.plan.id),
+    searchParams,
   ]);
   const phases = phaseRows.map(({ categories, ...phase }) => ({ phase, categories }));
+  const preselectedItemIds = (itemsParam ?? "")
+    .split(",")
+    .map((id) => Number(id))
+    .filter((id) => Number.isInteger(id) && id > 0);
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -34,6 +43,7 @@ export default async function NewSessionPage() {
       <SessionForm
         phases={phases}
         currentPhaseId={currentPhaseId}
+        preselectedItemIds={preselectedItemIds}
         locale={locale}
         dict={dict.sessionForm}
       />

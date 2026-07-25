@@ -39,36 +39,34 @@ export function PlanActions({
       >
         {isActive ? dict.active : dict.setActive}
       </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        nativeButton={false}
+        render={<Link href={`/plans/${planId}/edit`}>{dict.edit}</Link>}
+      />
       {isOwnedByUser && (
-        <>
-          <Button
-            variant="outline"
-            size="sm"
-            nativeButton={false}
-            render={<Link href={`/plans/${planId}/edit`}>{dict.edit}</Link>}
-          />
-          <Dialog>
-            <DialogTrigger render={<Button variant="destructive" size="sm" />}>
-              {dict.delete}
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>{dict.deleteDialogTitle}</DialogTitle>
-                <DialogDescription>{dict.deleteDialogDescription}</DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <DialogClose render={<Button variant="outline" />}>{dict.cancel}</DialogClose>
-                <Button
-                  variant="destructive"
-                  disabled={isPending}
-                  onClick={() => startTransition(() => deletePlan(planId))}
-                >
-                  {dict.confirmDelete}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </>
+        <Dialog>
+          <DialogTrigger render={<Button variant="destructive" size="sm" />}>
+            {dict.delete}
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{dict.deleteDialogTitle}</DialogTitle>
+              <DialogDescription>{dict.deleteDialogDescription}</DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose render={<Button variant="outline" />}>{dict.cancel}</DialogClose>
+              <Button
+                variant="destructive"
+                disabled={isPending}
+                onClick={() => startTransition(() => deletePlan(planId))}
+              >
+                {dict.confirmDelete}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );

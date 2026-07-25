@@ -24,18 +24,22 @@ type PhaseWithItems = {
 export function SessionForm({
   phases,
   currentPhaseId,
+  preselectedItemIds = [],
   locale,
   dict,
 }: {
   phases: PhaseWithItems[];
   currentPhaseId: number | null;
+  preselectedItemIds?: number[];
   locale: Locale;
   dict: Dictionary["sessionForm"];
 }) {
   const dateFnsLocale = getDateFnsLocale(locale);
   const [date, setDate] = useState<Date>(new Date());
   const [duration, setDuration] = useState("30");
-  const [selectedItemIds, setSelectedItemIds] = useState<Set<number>>(new Set());
+  const [selectedItemIds, setSelectedItemIds] = useState<Set<number>>(
+    () => new Set(preselectedItemIds),
+  );
   const [win, setWin] = useState("");
   const [struggle, setStruggle] = useState("");
   const [notes, setNotes] = useState("");
