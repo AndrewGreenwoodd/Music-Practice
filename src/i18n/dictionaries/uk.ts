@@ -86,6 +86,8 @@ export const uk: Dictionary = {
     editResetsProgressNote: "Збереження замінює етапи й пункти цього плану — прогрес, пов'язаний зі старими пунктами, буде скинуто.",
     parseErrorPrefix: "Не вдалося розпізнати цей план:",
     noPlans: "Ще немає планів.",
+    filterByInstrument: "Інструмент",
+    allInstruments: "Усі інструменти",
   },
   sessions: {
     title: "Історія занять",
@@ -146,7 +148,6 @@ export const uk: Dictionary = {
     clef: "Ключ",
     treble: "Скрипковий",
     bass: "Басовий",
-    includeSharps: "Додавати дієзи (♯)",
     showNote: "Показати ноту",
     newNote: "Нова нота",
     correct: "Правильно!",

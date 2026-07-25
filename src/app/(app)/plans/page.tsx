@@ -2,9 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { listPlansForUser } from "@/db/queries/plans";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PlanActions } from "@/components/plans/plan-actions";
+import { PlansList } from "@/components/plans/plans-list";
 import { getLocale } from "@/i18n/get-locale";
 import { getDictionary } from "@/i18n/get-dictionary";
 
@@ -27,35 +26,7 @@ export default async function PlansPage() {
         <Button nativeButton={false} render={<Link href="/plans/new">{dict.plans.uploadNew}</Link>} />
       </div>
 
-      {planRows.length === 0 ? (
-        <p className="text-muted-foreground">{dict.plans.noPlans}</p>
-      ) : (
-        <div className="space-y-3">
-          {planRows.map((plan) => (
-            <Card key={plan.id}>
-              <CardHeader>
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <CardTitle>{plan.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground">{plan.instrumentName}</p>
-                  </div>
-                  <PlanActions
-                    planId={plan.id}
-                    isActive={plan.isActive}
-                    isOwnedByUser={plan.isOwnedByUser}
-                    dict={dict.plans}
-                  />
-                </div>
-              </CardHeader>
-              {plan.description && (
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{plan.description}</p>
-                </CardContent>
-              )}
-            </Card>
-          ))}
-        </div>
-      )}
+      <PlansList plans={planRows} dict={dict.plans} />
     </div>
   );
 }

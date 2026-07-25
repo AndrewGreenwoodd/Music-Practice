@@ -84,6 +84,8 @@ export const en = {
     editResetsProgressNote: "Saving replaces this plan's phases and items — progress tracked against the old items will be reset.",
     parseErrorPrefix: "Couldn't parse this plan:",
     noPlans: "No plans yet.",
+    filterByInstrument: "Instrument",
+    allInstruments: "All instruments",
   },
   sessions: {
     title: "Practice history",
@@ -144,7 +146,6 @@ export const en = {
     clef: "Clef",
     treble: "Treble",
     bass: "Bass",
-    includeSharps: "Include sharps (♯)",
     showNote: "Show a note",
     newNote: "New note",
     correct: "Correct!",

@@ -1,26 +1,18 @@
-import { ledgerLinePositions, type Accidental, type Clef } from "@/lib/staff";
+import { ledgerLinePositions, type Clef } from "@/lib/staff";
 
 const STAFF_LINE_POSITIONS = [0, 2, 4, 6, 8];
 const UNIT = 6;
 const BOTTOM_LINE_Y = 104;
 const STAFF_LEFT = 28;
 const STAFF_RIGHT = 192;
-const NOTE_X = 148;
+const NOTE_X = 140;
 const LEDGER_HALF_WIDTH = 14;
 
 function yForPosition(position: number): number {
   return BOTTOM_LINE_Y - position * UNIT;
 }
 
-export function StaffDisplay({
-  clef,
-  position,
-  accidental = "natural",
-}: {
-  clef: Clef;
-  position: number;
-  accidental?: Accidental;
-}) {
+export function StaffDisplay({ clef, position }: { clef: Clef; position: number }) {
   const ledgers = ledgerLinePositions(position);
   const noteY = yForPosition(position);
   const noteX = NOTE_X;
@@ -64,12 +56,6 @@ export function StaffDisplay({
           strokeWidth={1.5}
         />
       ))}
-
-      {accidental === "sharp" && (
-        <text x={noteX - 26} y={noteY + 6} fontSize={20} className="fill-current">
-          {"♯"}
-        </text>
-      )}
 
       <ellipse
         cx={noteX}

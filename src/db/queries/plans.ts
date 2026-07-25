@@ -17,6 +17,7 @@ export async function listPlansForUser(userId: string, locale: Locale) {
       description: plan.description
         ? localized(plan.description, plan.descriptionUk, locale)
         : plan.description,
+      instrumentSlug: plan.instrument.slug,
       instrumentName: localized(plan.instrument.name, plan.instrument.nameUk, locale),
       isOwnedByUser: plan.ownerId === userId,
       isActive: plan.id === user?.activePlanId,

@@ -2187,6 +2187,1040 @@ const beginnerPianoPlan: {
   ],
 };
 
+const bassPlan: {
+  instrument: { slug: string; name: string; nameUk: string };
+  plan: { title: string; titleUk: string; description: string; descriptionUk: string };
+  phases: SeedPhase[];
+} = {
+  instrument: { slug: "bass", name: "Bass Guitar", nameUk: "Бас-гітара" },
+  plan: {
+    title: "Long-Term Bass Guitar Practice Plan",
+    titleUk: "Довгостроковий план практики гри на бас-гітарі",
+    description:
+      "Intermediate-level, 12-month plan focused on groove, walking bass, and harmony, ~30-45 min/day.",
+    descriptionUk:
+      "12-місячний план середнього рівня, зосереджений на грувах, walking-бас лінії та гармонії, ~30-45 хв/день.",
+  },
+  phases: [
+    {
+      orderIndex: 1,
+      title: "Foundations of the Fretboard and Groove",
+      titleUk: "Основи грифа та грува",
+      goal: "Know the neck cold and lock in with a metronome before adding any musical decisions.",
+      goalUk: "Знати гриф напам'ять і чітко триматися метроному, перш ніж додавати музичні рішення.",
+      durationLabel: "Months 1-3",
+      milestone:
+        "Naming any note on the E, A, D, and G strings in under 2 seconds means drilling the natural notes on each string individually until it's reflexive. Playing a steady root-note groove along with a drum-machine backing track for a full 4 minutes without drifting off tempo means your time-feel no longer depends on watching the metronome.",
+      categories: [
+        {
+          slug: "technique",
+          name: "Technique",
+          nameUk: "Техніка",
+          orderIndex: 1,
+          dailyMinMinutes: 15,
+          dailyMaxMinutes: 25,
+          items: [
+            {
+              title: "One-finger-per-fret chromatic warm-ups",
+              titleUk: "Хроматична розминка «один палець на лад»",
+              description:
+                "Play 1-2-3-4 (one finger per fret) across all four strings, ascending and descending, then shift up a fret and repeat. Builds fretting-hand independence and synchronization between the hands with almost no musical decision-making required.",
+              descriptionUk:
+                "Грайте 1-2-3-4 (один палець на лад) на всіх чотирьох струнах, вгору і вниз, потім зсуньтесь на лад вище і повторіть. Розвиває незалежність пальців лівої руки та синхронізацію обох рук, майже не вимагаючи музичних рішень.",
+            },
+            {
+              title: "Alternating index-middle plucking",
+              titleUk: "Почергове щипання вказівним і середнім пальцями",
+              description:
+                "Pluck strictly alternating between the index and middle fingers of the plucking hand, even across string changes. This is the right-hand equivalent of alternate picking on guitar and is what makes fast, even groove lines possible later on.",
+              descriptionUk:
+                "Щипайте струни строго почергово вказівним і середнім пальцями правої руки, навіть при переходах між струнами. Це аналог перемінного медіатора на гітарі для правої руки, і саме це в подальшому уможливлює швидкі, рівні грувові лінії.",
+            },
+            {
+              title: "Muting technique, both hands",
+              titleUk: "Техніка приглушення обома руками",
+              description:
+                "Bass tone lives and dies on the silence between notes: use unused fretting fingers to lightly touch adjacent strings, and let the plucking hand's palm rest lightly against the strings near the bridge. A clean bass line is defined as much by what doesn't ring as by what does.",
+              descriptionUk:
+                "Тон бас-гітари значною мірою визначається тишею між нотами: використовуйте незадіяні пальці лівої руки, щоб злегка торкатися сусідніх струн, і злегка притуляйте долоню правої руки до струн біля бриджа. Чиста баслінія визначається настільки ж тим, що не звучить, як і тим, що звучить.",
+            },
+            {
+              title: "Movable scale box patterns across the neck",
+              titleUk: "Рухомі «блокові» патерни гами по грифу",
+              description:
+                "Learn one movable major-scale box shape and slide it to different frets to play the same scale in every key. Covers the fretboard efficiently and is the standard shape vocabulary that later groove and walking-bass lines draw from.",
+              descriptionUk:
+                "Вивчіть одну рухому «блокову» форму мажорної гами та пересувайте її на різні лади, щоб грати ту саму гаму в будь-якій тональності. Це ефективно охоплює гриф і стає стандартною основою форм, з якої пізніше формуються грувові та walking-бас лінії.",
+            },
+          ],
+        },
+        {
+          slug: "theory",
+          name: "Theory",
+          nameUk: "Теорія",
+          orderIndex: 2,
+          items: [
+            {
+              title: "Reading the fretboard: natural notes on all 4 strings",
+              titleUk: "Читання грифа: натуральні ноти на всіх 4 струнах",
+              description:
+                "Drill the natural notes (no sharps/flats yet) on the E, A, D, and G strings individually, up to the 12th fret, until you can name any one instantly. This is the single most load-bearing skill for reading a chart at sight.",
+              descriptionUk:
+                "Відпрацюйте натуральні ноти (поки без дієзів/бемолів) на струнах E, A, D і G окремо, до 12-го ладу, доки не зможете миттєво назвати будь-яку з них. Це найважливіша навичка для читання чарта з листа.",
+              longDescription:
+                "A bass guitar's four strings (E-A-D-G, low to high) are tuned in perfect fourths, which means the exact same fingering shape you learn on one string works identically on the next string up, just shifted. That's a huge shortcut compared to a piano keyboard's fixed layout — once you know where the natural notes fall on the low E string (E-open, F-1st fret, G-3rd fret, A-5th fret, B-7th fret, C-8th fret, D-10th fret), the identical fret-pattern repeats on the A, D, and G strings.\n\nThe fastest way to actually own this, rather than just intellectually knowing it, is to pick a random natural note name, physically find it on one string, say it out loud, and check yourself — repeating until there's no hesitation, then moving to the next string. Do this before trying to memorize the whole fretboard as one giant grid; the grid falls into place quickly once each string is solid on its own.\n\nThis matters beyond trivia because nearly everything else in this plan assumes it: naming the root of a chord chart, building a scale from any starting note, and walking a bassline through changing harmony all require knowing, without pausing to calculate, exactly where a given note lives on the string you're already on.",
+              longDescriptionUk:
+                "Чотири струни бас-гітари (E-A-D-G, від нижчої до вищої) налаштовані на чисту кварту одна від одної, а це означає, що та сама аплікатура, яку ви вивчили на одній струні, працює ідентично і на сусідній струні вище, лише зі зсувом. Це величезна перевага порівняно з фіксованою розкладкою фортепіанної клавіатури — щойно ви знаєте, де лежать натуральні ноти на нижній струні E (E-відкрита, F-1-й лад, G-3-й лад, A-5-й лад, B-7-й лад, C-8-й лад, D-10-й лад), той самий ладовий патерн повторюється на струнах A, D і G.\n\nНайшвидший спосіб дійсно засвоїти це, а не просто знати теоретично — обрати випадкову назву натуральної ноти, фізично знайти її на одній струні, назвати вголос і перевірити себе, повторюючи, доки не зникне вагання, а тоді переходити до наступної струни. Робіть це перед тим, як намагатися запам'ятати весь гриф як одну велику сітку — сітка складається значно швидше, коли кожна струна вже впевнено засвоєна окремо.\n\nЦе важливо не як цікавий факт, а тому, що майже все інше в цьому плані спирається саме на це: називання основного тону з чарта, побудова гами від будь-якої ноти та ведення баслінії крізь змінну гармонію — все це вимагає миттєвого, без підрахунків, знання того, де саме на струні, на якій ви вже граєте, лежить потрібна нота.",
+            },
+            {
+              title: "Major scale construction (W-W-H-W-W-W-H)",
+              titleUk: "Побудова мажорної гами (Т-Т-П-Т-Т-Т-П)",
+              description:
+                "This interval formula is what defines 'major' in any key. Build it from different starting notes on one string only, so the sound of the pattern — not a memorized fingering — becomes what you recognize.",
+              descriptionUk:
+                "Ця формула інтервалів визначає «мажор» у будь-якій тональності. Будуйте її від різних нот на одній струні, щоб впізнавати саме звучання патерну, а не завчену аплікатуру.",
+            },
+            {
+              title: "Key signatures for all 12 keys",
+              titleUk: "Ключові знаки для всіх 12 тональностей",
+              description:
+                "Memorize which sharps or flats belong to each key, in the order they're added. Lets you look at a chart, name the key immediately, and predict which notes will fit under a bassline without checking each one.",
+              descriptionUk:
+                "Запам'ятайте, які дієзи чи бемолі належать кожній тональності, у порядку їх додавання. Це дозволяє одразу назвати тональність за чартом і передбачити, які ноти підійдуть до баслінії, не перевіряючи кожну окремо.",
+            },
+            {
+              title: "Root-fifth-octave shapes",
+              titleUk: "Форми основний тон-квінта-октава",
+              description:
+                "The three-note skeleton (root, 5th, octave) underlies the vast majority of bass lines across every genre. Learn its shape starting from each of the 4 strings so it's available no matter where a root falls.",
+              descriptionUk:
+                "Тризвучний скелет (основний тон, квінта, октава) лежить в основі переважної більшості басліній у будь-якому жанрі. Вивчіть його форму, починаючи від кожної з 4 струн, щоб вона була доступна незалежно від того, де лежить основний тон.",
+            },
+          ],
+        },
+        {
+          slug: "applied",
+          name: "Applied",
+          nameUk: "Застосування",
+          orderIndex: 3,
+          dailyMinMinutes: 10,
+          dailyMaxMinutes: 15,
+          items: [
+            {
+              title: "Play the major scale in one key across the neck",
+              titleUk: "Зіграйте мажорну гаму в одній тональності по всьому грифу",
+              description:
+                "Pick one key (e.g., G major) and play the scale ascending/descending starting from each string before moving to a new key. Depth in one key beats shallow exposure to all 12 at this stage.",
+              descriptionUk:
+                "Оберіть одну тональність (наприклад, соль мажор) і зіграйте гаму вгору/вниз, починаючи з кожної струни, перш ніж переходити до нової тональності. На цьому етапі глибина в одній тональності важливіша за поверхневе знайомство з усіма 12.",
+            },
+            {
+              title: "Play steady roots along with a metronome",
+              titleUk: "Грайте стабільні основні тони під метроном",
+              description:
+                "Pick a simple chord progression and play only the root note of each chord in steady quarter notes against a metronome, starting slow. This is the direct foundation every groove in Phase 2 builds on.",
+              descriptionUk:
+                "Оберіть просту акордову послідовність і грайте лише основний тон кожного акорду рівними чвертками під метроном, починаючи повільно. Це пряма основа, на якій будується кожен грув в Етапі 2.",
+            },
+          ],
+        },
+        {
+          slug: "ear_training",
+          name: "Ear training",
+          nameUk: "Тренування слуху",
+          orderIndex: 4,
+          dailyMinMinutes: 5,
+          dailyMaxMinutes: 5,
+          items: [
+            {
+              title: "Identify root movement by ear",
+              titleUk: "Розпізнавайте рух основного тону на слух",
+              description:
+                "Listen to a simple chord progression and try to sing or name the root note under each chord as it changes, before checking against the chart. This is the single most useful bass-specific ear-training skill there is.",
+              descriptionUk:
+                "Слухайте просту акордову послідовність і намагайтеся проспівати чи назвати основний тон під кожним акордом при його зміні, перш ніж звірятися з чартом. Це найкорисніша навичка тренування слуху саме для бас-гітариста.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      orderIndex: 2,
+      title: "Groove and Chord Tones",
+      titleUk: "Грув та акордові тони",
+      goal: "Build basslines from chord tones and lock reliably with the drummer's kick and snare.",
+      goalUk: "Будувати баслінії з акордових тонів і надійно триматися разом із бас-барабаном і малим барабаном ударника.",
+      durationLabel: "Months 4-6",
+      milestone:
+        "Given any I-IV-V progression, constructing a root-fifth-octave bassline on the spot, in time, with nothing written out, means you can hear a chord chart and immediately know where your hands go.",
+      categories: [
+        {
+          slug: "technique",
+          name: "Technique",
+          nameUk: "Техніка",
+          orderIndex: 1,
+          dailyMinMinutes: 15,
+          dailyMaxMinutes: 25,
+          items: [
+            {
+              title: "Fingerstyle groove patterns",
+              titleUk: "Грувові патерни fingerstyle",
+              description:
+                "Combine root-fifth-octave shapes into steady eighth-note groove patterns, keeping the index-middle alternation consistent through string changes and rests alike.",
+              descriptionUk:
+                "Поєднуйте форми основний тон-квінта-октава у стабільні грувові патерни вісімками, зберігаючи послідовне чергування вказівного й середнього пальців як при переходах між струнами, так і на паузах.",
+            },
+            {
+              title: "String muting cleanliness during string crossings",
+              titleUk: "Чистота приглушення при переходах між струнами",
+              description:
+                "As a groove moves across strings, the previous string keeps ringing unless actively muted. Practice slowly, listening specifically for unwanted ring from the string you just left.",
+              descriptionUk:
+                "Коли грув переходить між струнами, попередня струна продовжує звучати, якщо її активно не приглушити. Тренуйтеся повільно, спеціально прислухаючись до небажаного звучання струни, яку щойно залишили.",
+            },
+            {
+              title: "Economy of motion in position shifts",
+              titleUk: "Економія руху при зміні позиції",
+              description:
+                "When a bassline moves to a new position on the neck, identify the shortest path and the finger that leads the shift, instead of resetting your whole hand. Practicing the shift in isolation trains an efficient path.",
+              descriptionUk:
+                "Коли баслінія переходить у нову позицію на грифі, визначте найкоротший шлях і палець, що веде перехід, замість повного «скидання» всієї руки. Відпрацювання переходу окремо тренує ефективний шлях.",
+            },
+            {
+              title: "Intro to slap technique (thumb strike)",
+              titleUk: "Вступ до техніки slap (удар великим пальцем)",
+              description:
+                "Strike the low E or A string with the side of the thumb, letting it bounce off immediately, on a steady quarter-note pulse. Keep it slow and isolated before combining it with any popping or groove pattern.",
+              descriptionUk:
+                "Вдаряйте по струні E або A боком великого пальця, одразу відскакуючи, на стабільному пульсі чвертками. Тримайте темп повільним і відпрацьовуйте окремо, перш ніж поєднувати з поппінгом чи грувовим патерном.",
+            },
+          ],
+        },
+        {
+          slug: "theory",
+          name: "Theory",
+          nameUk: "Теорія",
+          orderIndex: 2,
+          items: [
+            {
+              title: "Triad construction (major/minor/dim/aug)",
+              titleUk: "Побудова тризвуків (мажор/мінор/зменшений/збільшений)",
+              description:
+                "Every triad is two stacked thirds. Learn to build and name all four qualities from any root by ear and by interval count, since bass lines are built almost entirely from these tones.",
+              descriptionUk:
+                "Кожен тризвук — це дві накладені терції. Навчіться будувати й називати всі чотири типи тризвуків від будь-якого основного тону на слух і за кількістю півтонів, адже баслінії будуються майже виключно з цих тонів.",
+              longDescription:
+                "A triad is built by stacking two thirds on top of a root: root, 3rd, 5th. What changes between major, minor, diminished, and augmented is only the size of those two thirds. A major triad stacks a major third (4 semitones) then a minor third (3 semitones) — root-3-5 spelled from C is C-E-G. A minor triad flips the order: minor third then major third — C-Eb-G. A diminished triad stacks two minor thirds (C-Eb-Gb), which is why it sounds unstable — the 5th is flattened, so there's no strong perfect-fifth anchor. An augmented triad stacks two major thirds (C-E-G#), raising the 5th instead.\n\nFor a bass player specifically, the triad is the skeleton that root-fifth-octave lines get 'filled in' with once you're ready to add the 3rd: playing root-3rd-5th-octave over a chord instantly outlines that chord's quality to a listener, even with nothing else playing. That's why hearing the difference between a major and minor third by ear (4 semitones vs. 3) is worth drilling directly — it's the one interval that decides whether a whole chord, and the bassline under it, sounds bright or dark.\n\nPractically: build all four triad qualities starting from the same root (say, C) back to back, on one string where possible, and say the quality out loud as you play each one. That trains the sound of 'major' vs. 'minor' vs. 'diminished' as a category you recognize, not a fingering you've memorized.",
+              longDescriptionUk:
+                "Тризвук будується накладанням двох терцій на основний тон: основний тон, терція, квінта. Те, що відрізняє мажор, мінор, зменшений і збільшений тризвуки — лише розмір цих двох терцій. Мажорний тризвук накладає велику терцію (4 півтони), потім малу терцію (3 півтони) — основний тон-3-5 від C дає C-E-G. Мінорний тризвук міняє порядок місцями: мала терція, потім велика — C-Eb-G. Зменшений тризвук накладає дві малі терції (C-Eb-Gb), тому й звучить нестабільно — квінта понижена, тож немає міцної опори чистої квінти. Збільшений тризвук накладає дві великі терції (C-E-G#), натомість підвищуючи квінту.\n\nСаме для бас-гітариста тризвук є тим скелетом, який лінії основний тон-квінта-октава «доповнюють», коли ви готові додати терцію: гра основний тон-терція-квінта-октава над акордом миттєво окреслює його якість для слухача, навіть якщо більше нічого не грає. Тому вміння розрізняти на слух велику й малу терцію (4 півтони проти 3) варте окремого відпрацювання — це той самий інтервал, що визначає, чи звучить увесь акорд, а разом із ним і баслінія під ним, світло чи темно.\n\nПрактично: побудуйте всі чотири типи тризвуків від одного й того ж основного тону (наприклад, C) підряд, по можливості на одній струні, і вголос називайте тип, граючи кожен із них. Це тренує саме звучання «мажору», «мінору» чи «зменшеного» як категорії, яку ви впізнаєте, а не аплікатуру, яку завчили.",
+            },
+            {
+              title: "Diatonic chords in a key (I-ii-iii-IV-V-vi-vii°)",
+              titleUk: "Діатонічні акорди в тональності (I-ii-iii-IV-V-vi-vii°)",
+              description:
+                "Every major key produces a fixed sequence of 7 chord qualities built from its own notes: major-minor-minor-major-major-minor-diminished. Knowing this lets you predict a chord chart's harmony before you even see it.",
+              descriptionUk:
+                "Кожна мажорна тональність утворює фіксовану послідовність із 7 типів акордів, побудованих на власних нотах: мажор-мінор-мінор-мажор-мажор-мінор-зменшений. Знання цього дозволяє передбачити гармонію чарта ще до того, як ви його побачите.",
+              longDescription:
+                "'Harmonizing the scale' means building a triad on top of every degree of the major scale using only notes already in that key. In C major you get: C major (I), D minor (ii), E minor (iii), F major (IV), G major (V), A minor (vi), B diminished (vii°). That major-minor-minor-major-major-minor-diminished quality pattern is identical in every major key, because it falls directly out of where the scale's two half-steps land.\n\nFor bass, this is the fastest route to predicting a chord chart without deriving each chord's notes from scratch: once you know a song is in G major, you already know ii is A minor, IV is C major, and vi is E minor, before you've even looked at the chart. That lets you spot the root of an upcoming chord early and plan the transition into it, rather than reacting late.\n\nPractice this by picking one key, naming all 7 diatonic chords from memory, then playing just the root of each one in order (I through vii°) as a simple ascending bassline — that single exercise ties the theory directly to what your hands are already doing.",
+              longDescriptionUk:
+                "«Гармонізація гами» означає побудову тризвука на кожному ступені мажорної гами, використовуючи лише ноти, що вже є в цій тональності. У до мажорі отримуємо: C major (I), D minor (ii), E minor (iii), F major (IV), G major (V), A minor (vi), B diminished (vii°). Цей патерн якостей — мажор-мінор-мінор-мажор-мажор-мінор-зменшений — однаковий у кожній мажорній тональності, оскільки прямо випливає з того, де в гамі лежать два півтони.\n\nДля бас-гітариста це найшвидший спосіб передбачити гармонію чарта, не виводячи ноти кожного акорду з нуля: щойно ви знаєте, що пісня в соль мажорі, ви вже знаєте, що ii — це A minor, IV — C major, а vi — E minor, ще до того, як поглянули на чарт. Це дозволяє заздалегідь помітити основний тон наступного акорду й спланувати перехід до нього, а не реагувати із запізненням.\n\nВідпрацьовуйте це так: оберіть одну тональність, назвіть усі 7 діатонічних акордів напам'ять, а потім зіграйте лише основний тон кожного по порядку (від I до vii°) як просту висхідну баслінію — ця одна вправа напряму пов'язує теорію з тим, що вже роблять ваші руки.",
+            },
+            {
+              title: "Arpeggios: root-3rd-5th-octave patterns",
+              titleUk: "Арпеджіо: патерни основний тон-терція-квінта-октава",
+              description:
+                "The natural next layer on top of root-fifth-octave. Adding the 3rd spells out major or minor quality explicitly, giving a bassline more melodic interest while staying fully inside the chord.",
+              descriptionUk:
+                "Природний наступний шар поверх основний тон-квінта-октава. Додавання терції явно окреслює мажорну чи мінорну якість, надаючи баслінії більше мелодійного інтересу, залишаючись повністю в межах акорду.",
+            },
+            {
+              title: "Approach notes: chromatic and scale-tone leading",
+              titleUk: "Підвідні ноти: хроматичне та гамове підведення",
+              description:
+                "A single note, one half-step or one scale-step below (or above) the next chord's root, played right before the chord change. Creates forward pull and is the seed of walking bass in Phase 4.",
+              descriptionUk:
+                "Одна нота, на півтон чи на ступінь гами нижче (або вище) основного тону наступного акорду, зіграна прямо перед зміною акорду. Створює відчуття руху вперед і є зерном walking-баса в Етапі 4.",
+            },
+          ],
+        },
+        {
+          slug: "applied",
+          name: "Applied",
+          nameUk: "Застосування",
+          orderIndex: 3,
+          dailyMinMinutes: 10,
+          dailyMaxMinutes: 15,
+          items: [
+            {
+              title: "Build a root-fifth-octave bassline over a I-IV-V progression",
+              titleUk: "Побудуйте баслінію основний тон-квінта-октава над послідовністю I-IV-V",
+              description:
+                "Take a simple I-IV-V progression and construct a groove using only root, 5th, and octave for each chord, keeping a steady rhythmic pattern throughout the changes.",
+              descriptionUk:
+                "Візьміть просту послідовність I-IV-V і побудуйте грув, використовуючи лише основний тон, квінту й октаву для кожного акорду, зберігаючи стабільний ритмічний патерн протягом усіх змін.",
+            },
+            {
+              title: "Lock to a simple drum groove",
+              titleUk: "Тримайтеся разом із простим барабанним грувом",
+              description:
+                "Play along with a drum-machine or looped drum track, deliberately placing notes with the kick drum. Locking with the kick, not just the click, is what actually makes a bassline feel good in a band.",
+              descriptionUk:
+                "Грайте разом із драм-машиною чи зацикленим барабанним треком, свідомо розміщуючи ноти разом із бас-барабаном. Саме тримання разом із бас-барабаном, а не лише з метрономом, і робить баслінію по-справжньому «грувовою» в гурті.",
+            },
+          ],
+        },
+        {
+          slug: "ear_training",
+          name: "Ear training",
+          nameUk: "Тренування слуху",
+          orderIndex: 4,
+          dailyMinMinutes: 5,
+          dailyMaxMinutes: 5,
+          items: [
+            {
+              title: "Major vs. minor chord quality by ear",
+              titleUk: "Мажорна чи мінорна якість акорду на слух",
+              description:
+                "Listen to isolated triads and identify major vs. minor before checking. This is the single interval-recognition skill (major vs. minor 3rd) that pays off the most across every future harmony topic.",
+              descriptionUk:
+                "Слухайте окремі тризвуки й визначайте мажор чи мінор, перш ніж перевіряти себе. Це та єдина навичка розпізнавання інтервалу (велика чи мала терція), яка найбільше окупається в усіх подальших темах гармонії.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      orderIndex: 3,
+      title: "Groove Vocabulary and Modes",
+      titleUk: "Грувовий словник та лади",
+      goal: "Expand rhythmic vocabulary across styles and connect modal color to specific chord types.",
+      goalUk: "Розширити ритмічний словник у різних стилях і пов'язати ладове забарвлення з конкретними типами акордів.",
+      durationLabel: "Months 7-9",
+      milestone:
+        "Playing a convincing 8-bar groove each in straight rock, funk (with ghost notes), and reggae (one-drop feel) styles, back to back, without the feel bleeding between them, means you've internalized rhythmic feel as a deliberate choice, not a default.",
+      categories: [
+        {
+          slug: "technique",
+          name: "Technique",
+          nameUk: "Техніка",
+          orderIndex: 1,
+          dailyMinMinutes: 15,
+          dailyMaxMinutes: 25,
+          items: [
+            {
+              title: "Syncopation and ghost notes",
+              titleUk: "Синкопа та ghost-ноти",
+              description:
+                "Ghost notes are muted, rhythmic-only plucks with no clear pitch, used to fill space and push a groove's feel without adding melodic clutter. Isolate them slowly before mixing them into a full pattern.",
+              descriptionUk:
+                "Ghost-ноти — це приглушені щипки, суто ритмічні, без чіткої висоти звуку, що заповнюють простір і підсилюють відчуття грува, не додаючи мелодійного «шуму». Відпрацьовуйте їх окремо й повільно, перш ніж вплітати у повний патерн.",
+            },
+            {
+              title: "Slap and pop technique",
+              titleUk: "Техніка slap і pop",
+              description:
+                "Combine the thumb-slap from Phase 2 with a popping motion (hooking a higher string with the index or middle finger and snapping it away from the fretboard) to build the classic funk slap-pop groove.",
+              descriptionUk:
+                "Поєднайте slap великим пальцем з Етапу 2 з рухом pop (зачепіть вищу струну вказівним чи середнім пальцем і різко відпустіть її від грифа), щоб побудувати класичний фанковий груув slap-pop.",
+            },
+            {
+              title: "String skipping and position shifts for fills",
+              titleUk: "Пропуск струн та зміна позиції для філів",
+              description:
+                "Practice short fills that skip a string rather than moving through it, and shift smoothly to a new fretboard position mid-phrase. Fills should interrupt a groove and land back in it, not derail the time.",
+              descriptionUk:
+                "Тренуйте короткі філи, що пропускають струну, а не проходять через неї, і плавно зміщуйтесь у нову позицію на грифі посеред фрази. Філ має перервати грув і повернутися в нього, а не збити темп.",
+            },
+            {
+              title: "Genre-specific right-hand patterns (funk, reggae, latin)",
+              titleUk: "Жанрові патерни правої руки (фанк, реггі, латина)",
+              description:
+                "Learn one signature pattern per genre: sixteenth-note funk syncopation, reggae's laid-back 'one drop' emphasis, and a basic latin tumbao pattern. Each has a distinct feel worth isolating on its own.",
+              descriptionUk:
+                "Вивчіть один характерний патерн для кожного жанру: шістнадцяткову синкопу фанку, розслаблений акцент «one drop» реггі та базовий латинський патерн тумбао. Кожен має власне, чітко відмінне відчуття, варте окремого відпрацювання.",
+            },
+          ],
+        },
+        {
+          slug: "theory",
+          name: "Theory",
+          nameUk: "Теорія",
+          orderIndex: 2,
+          items: [
+            {
+              title: "The 7 modes as reharmonizations of the major scale",
+              titleUk: "7 ладів як переосмислення мажорної гами",
+              description:
+                "Every mode is the same major scale's notes, just started from a different degree. Each starting point creates a different color relative to its own root, which is what a bass line can lean into over a given chord.",
+              descriptionUk:
+                "Кожен лад — це ті самі ноти мажорної гами, просто розпочаті з іншого ступеня. Кожна початкова точка створює інше забарвлення відносно власного основного тону, і саме на це може спиратися баслінія над конкретним акордом.",
+              longDescription:
+                "Take any major scale and start it from a different one of its 7 notes, and you get a mode — the same 7 pitches, but a new note treated as 'home,' which changes where the two half-steps land relative to that new root and gives each mode a distinct color. Starting from degree 1 gives Ionian (the major scale itself); from degree 2, Dorian; 3, Phrygian; 4, Lydian; 5, Mixolydian; 6, Aeolian (the natural minor / relative minor from Phase 1); 7, Locrian.\n\nFor a bass player, modes matter less as scales to run and more as a way to choose which non-chord tones color a line well over a given chord. Mixolydian (major scale with a flatted 7th) is the natural choice under a dominant 7th chord because it matches that chord's own flatted 7th. Dorian (minor scale with a raised 6th) is the standard choice under a minor 7th chord in a jazz or funk context, giving a slightly brighter color than plain natural minor.\n\nThe practical entry point: take a C major scale you already know cold, and just relabel it starting from D (D-E-F-G-A-B-C) — that's D Dorian, with zero new notes to learn, only a new root to hear it against. Play it over a D minor chord and listen for how it differs in color from D Aeolian (D-E-F-G-A-Bb-C, the relative-minor version) — that side-by-side comparison is what actually trains the ear to hear modal color, more than memorizing the mode names in order.",
+              longDescriptionUk:
+                "Візьміть будь-яку мажорну гаму та почніть її з іншої з її 7 нот — і отримаєте лад: ті самі 7 звуків, але «домом» вважається інша нота, що змінює, де відносно нового основного тону лежать два півтони, і надає кожному ладу власного забарвлення. Початок з 1-го ступеня дає іонійський лад (сама мажорна гама); з 2-го — дорійський; з 3-го — фригійський; з 4-го — лідійський; з 5-го — міксолідійський; з 6-го — еолійський (натуральний мінор / паралельний мінор з Етапу 1); з 7-го — локрійський.\n\nДля бас-гітариста лади важливі не так як гами для «пробіжок», а як спосіб обрати, які позаакордові тони добре забарвлюють лінію над конкретним акордом. Міксолідійський лад (мажорна гама з пониженим 7-м ступенем) — природний вибір над домінантсептакордом, бо збігається з власною пониженою септимою цього акорду. Дорійський лад (мінорна гама з підвищеним 6-м ступенем) — стандартний вибір над мінорним септакордом у джазовому чи фанковому контексті, надаючи трохи світлішого забарвлення, ніж звичайний натуральний мінор.\n\nПрактична відправна точка: візьміть гаму до мажор, яку ви вже добре знаєте, і просто перепозначте її, починаючи з D (D-E-F-G-A-B-C) — це і є ре дорійський, без жодної нової ноти для вивчення, лише новий основний тон, відносно якого варто її чути. Зіграйте її над акордом D minor і прислухайтеся, чим вона відрізняється за забарвленням від D Aeolian (D-E-F-G-A-Bb-C, версії паралельного мінору) — саме таке пряме порівняння тренує слух чути ладове забарвлення значно краще, ніж завчання назв ладів по порядку.",
+            },
+            {
+              title: "Pentatonic and blues scale relationships to modes",
+              titleUk: "Зв'язок пентатоніки та блюзової гами з ладами",
+              description:
+                "The minor pentatonic is a 5-note subset of Aeolian, and the blues scale adds one chromatic 'blue note' to it. Both are dependable, low-risk choices for fills and passing tones over almost any minor-family chord.",
+              descriptionUk:
+                "Мінорна пентатоніка — це 5-нотна підмножина еолійського ладу, а блюзова гама додає до неї один хроматичний «блюзовий тон». Обидві є надійним, безпечним вибором для філів і прохідних тонів практично над будь-яким акордом мінорної групи.",
+            },
+            {
+              title: "Chord-scale relationships for bass lines",
+              titleUk: "Зв'язок акорд-гама для басліній",
+              description:
+                "For each chord quality (major, minor, dominant 7th), there's a default scale that outlines it cleanly. Matching the right scale to the right chord in real time is what lets a bassline stay 'inside' the harmony while moving freely.",
+              descriptionUk:
+                "Для кожного типу акорду (мажор, мінор, домінантсептакорд) існує гама за замовчуванням, що чітко його окреслює. Підбір правильної гами до правильного акорду в реальному часі дозволяє баслінії залишатися «всередині» гармонії, вільно рухаючись.",
+            },
+            {
+              title: "7th chords (maj7, min7, dom7, m7b5) and their key bass tones",
+              titleUk: "Септакорди (maj7, min7, dom7, m7b5) та їхні ключові басові тони",
+              description:
+                "Adding a 4th note (the 7th) to a triad sharpens its identity — a dominant 7th and a major 7th share the same root/3rd/5th but sound completely different. Know which chord tone to lean on for each quality.",
+              descriptionUk:
+                "Додавання четвертої ноти (септими) до тризвуку загострює його ідентичність — домінантсептакорд і мажорний септакорд мають однакові основний тон/терцію/квінту, але звучать зовсім по-різному. Знайте, на який акордовий тон спиратися для кожного типу.",
+            },
+          ],
+        },
+        {
+          slug: "applied",
+          name: "Applied",
+          nameUk: "Застосування",
+          orderIndex: 3,
+          dailyMinMinutes: 10,
+          dailyMaxMinutes: 15,
+          items: [
+            {
+              title: "Improvise a groove over a static vamp",
+              titleUk: "Імпровізуйте грув над статичним вампом",
+              description:
+                "Loop a single chord and build a groove using chord tones plus one carefully chosen passing tone. Constraining yourself to one extra note at a time keeps the improvisation focused instead of random.",
+              descriptionUk:
+                "Зацикліть один акорд і побудуйте грув, використовуючи акордові тони плюс один ретельно обраний прохідний тон. Обмеження себе одним додатковим тоном за раз тримає імпровізацію цілеспрямованою, а не хаотичною.",
+            },
+            {
+              title: "Learn one real bassline per week, by ear",
+              titleUk: "Вивчайте одну реальну баслінію на тиждень, на слух",
+              description:
+                "Pick a song with a recognizable bass part and work it out from the recording rather than a tab, slowing playback if needed. Transcribing by ear directly trains the same skill as the ear-training section below.",
+              descriptionUk:
+                "Оберіть пісню з упізнаваною басовою партією та підберіть її із запису, а не з табулатури, за потреби сповільнюючи відтворення. Підбір на слух безпосередньо тренує ту саму навичку, що й розділ тренування слуху нижче.",
+            },
+          ],
+        },
+        {
+          slug: "ear_training",
+          name: "Ear training",
+          nameUk: "Тренування слуху",
+          orderIndex: 4,
+          dailyMinMinutes: 5,
+          dailyMaxMinutes: 5,
+          items: [
+            {
+              title: "Distinguish major-family vs. minor-family modes by ear",
+              titleUk: "Розрізняйте лади мажорної та мінорної груп на слух",
+              description:
+                "Listen to short modal vamps and identify whether the overall color leans major-bright (Ionian, Lydian, Mixolydian) or minor-dark (Dorian, Phrygian, Aeolian), before naming the exact mode.",
+              descriptionUk:
+                "Слухайте короткі ладові вампи й визначайте, чи загальне забарвлення тяжіє до мажорно-світлого (іонійський, лідійський, міксолідійський) чи мінорно-темного (дорійський, фригійський, еолійський), перш ніж називати конкретний лад.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      orderIndex: 4,
+      title: "Walking Bass and Advanced Harmony",
+      titleUk: "Walking-бас та поглиблена гармонія",
+      goal: "Construct moving basslines over changing harmony and develop a personal voice.",
+      goalUk: "Будувати рухливі баслінії над змінною гармонією та розвивати власний музичний голос.",
+      durationLabel: "Months 10-12",
+      milestone:
+        "Walking a convincing quarter-note bassline through a 12-bar blues or a simple jazz standard's changes, using a chromatic approach note into each new chord, means you can outline harmony in real time instead of only playing pre-planned patterns.",
+      categories: [
+        {
+          slug: "technique",
+          name: "Technique",
+          nameUk: "Техніка",
+          orderIndex: 1,
+          dailyMinMinutes: 15,
+          dailyMaxMinutes: 25,
+          items: [
+            {
+              title: "Walking bass technique",
+              titleUk: "Техніка walking-баса",
+              description:
+                "Steady, unbroken quarter notes with consistent tone and volume across every string and position change, so the line's momentum never dips even as the notes chosen underneath it get more complex.",
+              descriptionUk:
+                "Стабільні, безперервні чвертки з рівним тоном і гучністю на будь-якій струні та при будь-якій зміні позиції, щоб рух лінії ніколи не «провисав», навіть коли ноти під ним стають складнішими.",
+            },
+            {
+              title: "Dynamics and touch control",
+              titleUk: "Динаміка та контроль дотику",
+              description:
+                "Practice the same groove at three deliberately different volumes (soft, medium, hard) with even tone at each, so dynamics become a controlled choice you make rather than an accident of how hard you happened to pluck.",
+              descriptionUk:
+                "Тренуйте той самий грув на трьох свідомо різних рівнях гучності (тихо, середньо, гучно) з рівним тоном на кожному, щоб динаміка стала контрольованим вибором, а не випадковістю сили щипка.",
+            },
+            {
+              title: "Extended range awareness (5-string low B)",
+              titleUk: "Обізнаність з розширеним діапазоном (5-струнний, нижній B)",
+              description:
+                "Optional if you own a 5-string bass: learn the natural notes on the low B string and how it extends the same box shapes and root-fifth patterns you already know a fourth lower.",
+              descriptionUk:
+                "Необов'язково, якщо у вас 5-струнний бас: вивчіть натуральні ноти на нижній струні B і те, як вона розширює ті самі «блокові» форми та патерни основний тон-квінта, які ви вже знаєте, на кварту нижче.",
+            },
+            {
+              title: "Efficient position shifting across the full neck",
+              titleUk: "Ефективна зміна позиції по всьому грифу",
+              description:
+                "Walking bass lines often need a wider range than a groove confined to one position. Practice shifting cleanly across 2-3 positions within a single 4-bar phrase without a rhythmic hiccup.",
+              descriptionUk:
+                "Walking-баслінії часто потребують ширшого діапазону, ніж грув, обмежений однією позицією. Тренуйте чисту зміну між 2-3 позиціями в межах однієї 4-тактової фрази без ритмічного «збою».",
+            },
+          ],
+        },
+        {
+          slug: "theory",
+          name: "Theory",
+          nameUk: "Теорія",
+          orderIndex: 2,
+          items: [
+            {
+              title: "Secondary dominants",
+              titleUk: "Побічні домінанти",
+              description:
+                "A dominant 7th chord borrowed from outside the key to briefly point toward a chord other than the tonic, sharpening the pull into it. A common and highly effective color to add to an otherwise diatonic progression.",
+              descriptionUk:
+                "Домінантсептакорд, запозичений поза межами тональності, щоб на мить указати на акорд, відмінний від тоніки, посилюючи тяжіння до нього. Поширений і дуже ефективний спосіб додати барви до інакше суто діатонічної послідовності.",
+            },
+            {
+              title: "Borrowed chords",
+              titleUk: "Запозичені акорди",
+              description:
+                "A chord pulled from the parallel minor (or major) key and inserted into an otherwise diatonic progression for a moment of unexpected color, most often the minor iv borrowed into a major-key progression.",
+              descriptionUk:
+                "Акорд, узятий з однойменної мінорної (чи мажорної) тональності й вставлений в інакше суто діатонічну послідовність для миті несподіваного забарвлення, найчастіше мінорний iv, запозичений у мажорну послідовність.",
+            },
+            {
+              title: "Extended chords (9ths, 11ths, 13ths) and their key bass tones",
+              titleUk: "Розширені акорди (9, 11, 13) та їхні ключові басові тони",
+              description:
+                "Extensions stack further thirds past the 7th. As a bass player you rarely need to play every extension — usually the root plus one characteristic upper tone is enough to imply the full chord.",
+              descriptionUk:
+                "Розширення накладають додаткові терції понад септиму. Як бас-гітаристу вам рідко потрібно грати кожне розширення — зазвичай достатньо основного тону плюс одного характерного верхнього тону, щоб натякнути на весь акорд.",
+            },
+            {
+              title: "Constructing walking basslines: approach notes",
+              titleUk: "Побудова walking-басліній: підвідні ноти",
+              description:
+                "A walking line is chord tones on the strong beats and a chromatic or scale-tone approach note leading into the next chord's root. That one recurring device is what makes a walking line sound intentional rather than random.",
+              descriptionUk:
+                "Walking-лінія — це акордові тони на сильних долях і хроматична чи гамова підвідна нота, що веде до основного тону наступного акорду. Саме цей один повторюваний прийом і робить walking-лінію свідомою, а не хаотичною.",
+              longDescription:
+                "A walking bassline's job is to state the current chord clearly on the strong beats while still creating forward motion toward the next chord. The standard formula over 4 beats is: root on beat 1, another chord tone (3rd or 5th) on beat 2 or 3, and an approach note on the last beat that leads directly into the next chord's root — either a half-step above or below it (chromatic approach) or a scale-tone a whole step away (diatonic approach).\n\nOver a 12-bar blues in C, for example, a simple walking line into the F7 chord in bar 5 might play C-E-G-Gb on beats 1-2-3-4 of bar 4: root, 3rd, 5th, then a chromatic approach note a half-step below F. That last note isn't 'in' the C7 chord at all — its whole purpose is to create tension that resolves the instant the F7 chord arrives, which is exactly what makes the line feel like it's walking somewhere rather than just outlining static harmony.\n\nThe practical drill: take a progression you already know the diatonic chords for (from Phase 2's harmonization work), and for every chord change, ask only one question — 'what note, one step away from the next root, can I play right before it?' Do that consistently and the rest of the walking line (root-3rd-5th on the earlier beats) is already familiar territory from everything drilled so far.",
+              longDescriptionUk:
+                "Завдання walking-баслінії — чітко окреслити поточний акорд на сильних долях, водночас створюючи рух уперед до наступного акорду. Стандартна формула на 4 долі: основний тон на 1-й долі, інший акордовий тон (терція чи квінта) на 2-й чи 3-й, і підвідна нота на останній долі, що веде прямо до основного тону наступного акорду — або на півтон вище чи нижче нього (хроматичне підведення), або на цілий тон гами (діатонічне підведення).\n\nНаприклад, у 12-тактовому блюзі в C проста walking-лінія до акорду F7 у 5-му такті могла б зіграти C-E-G-Gb на долях 1-2-3-4 4-го такту: основний тон, терція, квінта, а потім хроматична підвідна нота на півтон нижче F. Ця остання нота взагалі не входить до акорду C7 — її ціла мета в тому, щоб створити напругу, яка розв'язується миттєво з приходом акорду F7, і саме це створює відчуття, що лінія кудись «йде», а не просто окреслює статичну гармонію.\n\nПрактична вправа: візьміть послідовність, для якої ви вже знаєте діатонічні акорди (з роботи над гармонізацією в Етапі 2), і при кожній зміні акорду ставте лише одне питання — «яку ноту, на крок від наступного основного тону, я можу зіграти прямо перед ним?». Робіть це послідовно, і решта walking-лінії (основний тон-терція-квінта на попередніх долях) уже буде знайомою територією з усього відпрацьованого раніше.",
+            },
+          ],
+        },
+        {
+          slug: "applied",
+          name: "Applied",
+          nameUk: "Застосування",
+          orderIndex: 3,
+          dailyMinMinutes: 10,
+          dailyMaxMinutes: 15,
+          items: [
+            {
+              title: "Walk a bassline through a 12-bar blues progression",
+              titleUk: "Проведіть walking-баслінію крізь 12-тактовий блюз",
+              description:
+                "Apply the approach-note formula across all 12 bars of a blues progression, at a slow, steady tempo first. Getting through all 12 bars without a rhythmic gap is the win, not speed.",
+              descriptionUk:
+                "Застосуйте формулу підвідних нот у всіх 12 тактах блюзової послідовності, спершу в повільному, стабільному темпі. Мета — пройти всі 12 тактів без ритмічного «розриву», а не швидкість.",
+            },
+            {
+              title: "Compose an 8-16 bar original bassline",
+              titleUk: "Складіть оригінальну баслінію на 8-16 тактів",
+              description:
+                "Write (or record) an original bassline over a chord progression of your choice, combining groove, chord tones, and approach notes from everything covered so far. Write it down or record it so you can play it back consistently.",
+              descriptionUk:
+                "Напишіть (чи запишіть) оригінальну баслінію над обраною вами акордовою послідовністю, поєднуючи грув, акордові тони й підвідні ноти з усього вивченого досі. Запишіть її на папері чи в аудіо, щоб стабільно відтворювати надалі.",
+            },
+          ],
+        },
+        {
+          slug: "ear_training",
+          name: "Ear training",
+          nameUk: "Тренування слуху",
+          orderIndex: 4,
+          dailyMinMinutes: 5,
+          dailyMaxMinutes: 5,
+          items: [
+            {
+              title: "Full chord quality ID including extensions",
+              titleUk: "Повне визначення якості акорду, включно з розширеннями",
+              description:
+                "Listen to chords ranging from simple triads to 7ths and basic extensions, identifying the full quality (e.g., 'minor 7th' not just 'minor') before checking against the source.",
+              descriptionUk:
+                "Слухайте акорди — від простих тризвуків до септакордів і базових розширень, визначаючи повну якість (наприклад, «мінорний септакорд», а не просто «мінор»), перш ніж перевіряти себе за джерелом.",
+            },
+            {
+              title: "Transcribe a short bassline from a real song",
+              titleUk: "Підберіть на слух коротку баслінію з реальної пісні",
+              description:
+                "Weekly: pick an 8-16 bar section of a bassline you don't already know, work it out entirely by ear, and write down the notes (or record yourself playing it back) as proof of the transcription.",
+              descriptionUk:
+                "Щотижня: оберіть 8-16-тактовий фрагмент незнайомої вам баслінії, повністю підберіть його на слух і запишіть ноти (чи запишіть себе на аудіо, граючи його) як підтвердження підбору.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      orderIndex: 0,
+      isOngoing: true,
+      title: "Ongoing Habits",
+      titleUk: "Постійні звички",
+      goal: "Habits that run across every phase, all year, independent of where you are in the plan.",
+      goalUk:
+        "Звички, що діють протягом усіх етапів, увесь рік, незалежно від того, на якому етапі плану ви перебуваєте.",
+      categories: [
+        {
+          slug: "metronome",
+          name: "Metronome Tracking",
+          nameUk: "Відстеження темпу метрономом",
+          orderIndex: 1,
+          items: [
+            {
+              title: "Metronome always on",
+              titleUk: "Метроном завжди увімкнений",
+              description:
+                "Track a specific tempo number per exercise over time (e.g., 'root-note groove: 80 BPM → 108 BPM over 6 weeks') so progress is measurable instead of a vague feeling of 'getting tighter.'",
+              descriptionUk:
+                "Відстежуйте конкретний темп для кожної вправи з часом (наприклад, «грув на основних тонах: 80 → 108 уд/хв за 6 тижнів»), щоб прогрес був вимірюваним, а не розмитим відчуттям «стає щільніше».",
+            },
+          ],
+        },
+        {
+          slug: "practice_log",
+          name: "Practice Log",
+          nameUk: "Щоденник практики",
+          orderIndex: 2,
+          items: [
+            {
+              title: "One line per session",
+              titleUk: "Один рядок за заняття",
+              description:
+                "What you worked on, one small win, one specific struggle is enough. Read back through a month of entries occasionally; patterns in what keeps showing up as 'struggle' tell you where to spend more deliberate time.",
+              descriptionUk:
+                "Достатньо того, над чим працювали, одного маленького успіху й однієї конкретної труднощі. Час від часу перечитуйте записи за місяць; патерни в тому, що постійно повторюється як «труднощі», підказують, де варто приділити більше свідомої уваги.",
+            },
+          ],
+        },
+        {
+          slug: "review",
+          name: "Revisit Old Material",
+          nameUk: "Повернення до старого матеріалу",
+          orderIndex: 3,
+          items: [
+            {
+              title: "Periodic review without warm-up",
+              titleUk: "Періодичний перегляд без розминки",
+              description:
+                "Every couple of weeks, replay a groove or bassline from an earlier phase without warming up on it first. If it's shaky, that's useful information — it means the skill needs occasional maintenance reps, not that you failed to learn it.",
+              descriptionUk:
+                "Раз на кілька тижнів переграйте грув чи баслінію з попереднього етапу без попередньої розминки. Якщо виходить нестабільно — це корисна інформація: навичка потребує періодичних підтримуючих повторень, а не свідчення того, що ви її не вивчили.",
+            },
+          ],
+        },
+        {
+          slug: "repertoire",
+          name: "Real Music Alongside Drills",
+          nameUk: "Реальна музика поряд із вправами",
+          orderIndex: 4,
+          items: [
+            {
+              title: "Learn one real bassline per week",
+              titleUk: "Вивчайте одну реальну баслінію на тиждень",
+              description:
+                "For every phase's technique or theory concept, find or pick a real song whose bassline uses it, so the abstract concept always has a concrete, motivating home rather than living only in exercises.",
+              descriptionUk:
+                "Для кожного технічного чи теоретичного поняття з кожного етапу знайдіть чи оберіть реальну пісню, баслінія якої його використовує, щоб абстрактне поняття завжди мало конкретний, мотивуючий дім, а не існувало лише у вправах.",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const beginnerBassPlan: {
+  instrument: { slug: string; name: string; nameUk: string };
+  plan: { title: string; titleUk: string; description: string; descriptionUk: string };
+  phases: SeedPhase[];
+} = {
+  instrument: { slug: "bass", name: "Bass Guitar", nameUk: "Бас-гітара" },
+  plan: {
+    title: "Beginner Bass Guitar Practice Plan",
+    titleUk: "План практики гри на бас-гітарі для початківців",
+    description:
+      "For complete beginners, 6-month plan building hand position, first grooves, and reading fundamentals from zero, ~20-30 min/day. Graduate into the Long-Term Bass Guitar Practice Plan afterward.",
+    descriptionUk:
+      "Для абсолютних початківців, 6-місячний план, що з нуля розвиває положення рук, перші груви та основи читання, ~20-30 хв/день. Після завершення переходьте до Довгострокового плану практики гри на бас-гітарі.",
+  },
+  phases: [
+    {
+      orderIndex: 1,
+      title: "Absolute Basics",
+      titleUk: "Абсолютні основи",
+      goal: "Build comfortable hand position and play steady root notes in time.",
+      goalUk: "Розвинути зручне положення рук і грати стабільні основні тони в темпі.",
+      durationLabel: "Months 1-3",
+      milestone:
+        "Playing a steady stream of quarter-note root notes along with a metronome at 80 BPM for 2 minutes without speeding up, slowing down, or losing the beat means your fretting and plucking hands are finally moving independently of each other.",
+      categories: [
+        {
+          slug: "technique",
+          name: "Technique",
+          nameUk: "Техніка",
+          orderIndex: 1,
+          dailyMinMinutes: 15,
+          dailyMaxMinutes: 20,
+          items: [
+            {
+              title: "Sitting or standing posture and hand position",
+              titleUk: "Постава сидячи чи стоячи та положення рук",
+              description:
+                "Hold the bass so the neck angles slightly upward and your fretting hand can reach any fret without hunching. A comfortable, repeatable position now prevents tension habits that are hard to undo later.",
+              descriptionUk:
+                "Тримайте бас так, щоб гриф був злегка нахилений вгору, а ліва рука могла дістати будь-який лад без згинання спини. Зручне, повторюване положення зараз запобігає звичкам напруження, які важко виправити пізніше.",
+            },
+            {
+              title: "Fretting hand basics: one finger per fret",
+              titleUk: "Основи лівої руки: один палець на лад",
+              description:
+                "Assign fingers 1-2-3-4 to four consecutive frets and press just behind the fret with light, consistent pressure — enough for a clean note, no more. Excess grip is the most common source of early fatigue.",
+              descriptionUk:
+                "Призначте пальці 1-2-3-4 на чотири послідовні лади й натискайте одразу за ладом з легким, стабільним тиском — рівно стільки, щоб отримати чистий звук, не більше. Надмірний хват — найпоширеніша причина ранньої втоми.",
+            },
+            {
+              title: "Alternating index-middle plucking, right hand",
+              titleUk: "Почергове щипання вказівним і середнім пальцями, права рука",
+              description:
+                "Rest the plucking hand's thumb on a lower string for an anchor, and pluck strictly alternating between the index and middle fingers. Consistency between the two fingers matters more than speed at this stage.",
+              descriptionUk:
+                "Покладіть великий палець правої руки на нижчу струну як опору й щипайте суворо почергово вказівним і середнім пальцями. На цьому етапі узгодженість між двома пальцями важливіша за швидкість.",
+            },
+            {
+              title: "Basic muting: keeping unplayed strings quiet",
+              titleUk: "Базове приглушення: тиша на незадіяних струнах",
+              description:
+                "Let the fretting hand's unused fingers rest lightly against neighboring strings, and let the plucking hand's palm settle near the bridge. A muted, silent string is just as important as a clean note.",
+              descriptionUk:
+                "Дозвольте незадіяним пальцям лівої руки злегка торкатися сусідніх струн, а долоні правої руки — спокійно лежати біля бриджа. Приглушена, тиха струна настільки ж важлива, як і чиста нота.",
+            },
+          ],
+        },
+        {
+          slug: "theory",
+          name: "Theory",
+          nameUk: "Теорія",
+          orderIndex: 2,
+          items: [
+            {
+              title: "Parts of the bass and the four open strings (E-A-D-G)",
+              titleUk: "Частини бас-гітари та чотири відкриті струни (E-A-D-G)",
+              description:
+                "Learn the names of the strings from lowest to highest (E-A-D-G) and how to tune each one, either by ear against a reference or with a tuner. Everything else in this plan assumes you can find these four notes instantly.",
+              descriptionUk:
+                "Вивчіть назви струн від найнижчої до найвищої (E-A-D-G) і те, як налаштувати кожну — на слух за еталоном або за допомогою тюнера. Усе інше в цьому плані передбачає, що ви можете миттєво знайти ці чотири ноти.",
+            },
+            {
+              title: "Natural notes on the E and A strings, up to the 5th fret",
+              titleUk: "Натуральні ноти на струнах E і A, до 5-го ладу",
+              description:
+                "Starting from the open low E string, the natural (non-sharp) notes up to the 5th fret are: E-open, F (1st fret), G (3rd fret), A (5th fret). Do the same on the A string: A-open, B (2nd fret), C (3rd fret), D (5th fret).",
+              descriptionUk:
+                "Починаючи з відкритої нижньої струни E, натуральні (без дієзів) ноти до 5-го ладу: E-відкрита, F (1-й лад), G (3-й лад), A (5-й лад). Те саме на струні A: A-відкрита, B (2-й лад), C (3-й лад), D (5-й лад).",
+              longDescription:
+                "The fastest way to learn this isn't staring at a chart — it's picking a random natural note name, physically finding it on the low E string, saying it out loud, and checking yourself, repeating until you stop hesitating. Then repeat the whole process on the A string.\n\nThis matters beyond trivia: once you know where these notes sit on the two lowest strings, you can name the root of any bassline you're playing there, which is the beginning of understanding what a bassline is actually built from rather than just memorizing finger positions.\n\nA useful shortcut once both strings feel solid: the note at any fret on the A string is exactly a perfect fourth (5 frets) above the same-fret note on the E string, so B on the A string (2nd fret) is a fourth above F# on the E string (2nd fret) — noticing that relationship is what eventually lets the whole fretboard click into place as one connected system rather than four separate strings to memorize.",
+              longDescriptionUk:
+                "Найшвидший спосіб вивчити це — не вдивлятися в схему, а обирати випадкову назву натуральної ноти, фізично знаходити її на нижній струні E, називати вголос і перевіряти себе, повторюючи, доки не зникне вагання. Потім повторіть весь процес на струні A.\n\nЦе важливо не як цікавий факт: щойно ви знаєте, де лежать ці ноти на двох нижніх струнах, ви можете назвати основний тон будь-якої баслінії, яку граєте на них — це початок розуміння того, з чого насправді складається баслінія, а не просто завчання положень пальців.\n\nКорисна підказка, коли обидві струни вже добре засвоєні: нота на будь-якому ладу струни A завжди на чисту кварту (5 ладів) вища за ноту на тому самому ладу струни E, тож B на струні A (2-й лад) — це кварта вище за F# на струні E (2-й лад). Помітивши цей зв'язок, з часом весь гриф складається в одну цілісну систему, а не в чотири окремі струни для завчання.",
+            },
+            {
+              title: "Reading a simple chord chart (root notes only)",
+              titleUk: "Читання простого акордового чарта (лише основні тони)",
+              description:
+                "A chord chart's letter names (C, G, Am, etc.) tell you exactly which root note to play under each chord — nothing more is needed yet. Practice reading a simple chart and playing only the root of each chord in time.",
+              descriptionUk:
+                "Літерні позначення акордового чарта (C, G, Am тощо) прямо вказують, який основний тон грати під кожним акордом — наразі більше нічого не потрібно. Тренуйтеся читати простий чарт і грати лише основний тон кожного акорду в темпі.",
+            },
+          ],
+        },
+        {
+          slug: "applied",
+          name: "Applied",
+          nameUk: "Застосування",
+          orderIndex: 3,
+          dailyMinMinutes: 10,
+          dailyMaxMinutes: 15,
+          items: [
+            {
+              title: "Play steady root notes along with a metronome",
+              titleUk: "Грайте стабільні основні тони під метроном",
+              description:
+                "Pick one note, play it in steady quarter notes at a slow, comfortable tempo, and gradually increase the tempo only once it feels effortless. Rock-solid timing on one note beats shaky timing across many.",
+              descriptionUk:
+                "Оберіть одну ноту, грайте її рівними чвертками в повільному, комфортному темпі й поступово підвищуйте темп лише тоді, коли це стає легко. Абсолютно стабільний ритм на одній ноті кращий за нестабільний на багатьох.",
+            },
+            {
+              title: "Play root notes of a simple I-IV-V progression",
+              titleUk: "Грайте основні тони простої послідовності I-IV-V",
+              description:
+                "Along with a backing track or metronome, play only the root note of a simple three-chord progression, changing notes exactly when the chord changes. This is your first real 'bassline.'",
+              descriptionUk:
+                "Разом із бекінг-треком чи метрономом грайте лише основний тон простої трьохакордової послідовності, змінюючи ноту саме тоді, коли змінюється акорд. Це ваша перша справжня «баслінія».",
+            },
+          ],
+        },
+        {
+          slug: "ear_training",
+          name: "Ear training",
+          nameUk: "Тренування слуху",
+          orderIndex: 4,
+          dailyMinMinutes: 5,
+          dailyMaxMinutes: 5,
+          items: [
+            {
+              title: "Recognize when the root note changes, by ear",
+              titleUk: "Розпізнавайте на слух зміну основного тону",
+              description:
+                "Listen to a simple recorded progression and try to notice, just by ear, the exact moment the bass note changes — before looking at any chart. You don't need to name the note yet, just catch the change.",
+              descriptionUk:
+                "Слухайте просту записану послідовність і намагайтеся на слух вловити точний момент зміни басової ноти — перш ніж дивитися на будь-який чарт. Наразі не обов'язково називати ноту, достатньо вловити саму зміну.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      orderIndex: 2,
+      title: "First Grooves and Simple Songs",
+      titleUk: "Перші груви та прості пісні",
+      goal: "Play simple steady basslines along with real songs and keep time reliably.",
+      goalUk: "Грати прості стабільні баслінії разом із реальними піснями та надійно тримати темп.",
+      durationLabel: "Months 4-6",
+      milestone:
+        "Playing along with a simple recorded song's verse and chorus using just root notes, in time, without falling behind or rushing, means you're ready to start adding the 5th and octave in the Long-Term plan next.",
+      categories: [
+        {
+          slug: "technique",
+          name: "Technique",
+          nameUk: "Техніка",
+          orderIndex: 1,
+          dailyMinMinutes: 15,
+          dailyMaxMinutes: 20,
+          items: [
+            {
+              title: "Groove exercises with a metronome, alternating fingers",
+              titleUk: "Грувові вправи під метроном, чергування пальців",
+              description:
+                "Combine steady eighth notes with the index-middle alternation from Phase 1, keeping every note the same volume and length. This is the direct building block of every groove pattern going forward.",
+              descriptionUk:
+                "Поєднуйте рівні вісімки з чергуванням вказівного й середнього пальців з Етапу 1, зберігаючи однакову гучність і тривалість кожної ноти. Це прямий будівельний блок для кожного грувового патерну надалі.",
+            },
+            {
+              title: "Clean string changes without extra noise",
+              titleUk: "Чисті переходи між струнами без зайвих шумів",
+              description:
+                "When moving from one string to the next, deliberately mute the string you just left with a fretting-hand finger. Small extra noises here are the most common thing that makes a beginner bassline sound messy.",
+              descriptionUk:
+                "Переходячи з однієї струни на іншу, свідомо приглушуйте струну, яку щойно залишили, пальцем лівої руки. Дрібні зайві шуми — найпоширеніша причина, чому баслінія початківця звучить неохайно.",
+            },
+            {
+              title: "Simple root-fifth fingerstyle pattern",
+              titleUk: "Простий патерн fingerstyle основний тон-квінта",
+              description:
+                "Alternate between a chord's root and its 5th in a steady rhythm — the simplest groove pattern that still sounds musical rather than static, and the direct entry point into Phase 2 of the Long-Term plan.",
+              descriptionUk:
+                "Чергуйте основний тон акорду з його квінтою в стабільному ритмі — найпростіший грувовий патерн, який все ще звучить музично, а не статично, і пряма відправна точка для Етапу 2 Довгострокового плану.",
+            },
+            {
+              title: "Basic rhythm reading (quarter and eighth notes)",
+              titleUk: "Базове читання ритму (чвертки та вісімки)",
+              description:
+                "Learn to read and count simple quarter- and eighth-note rhythms on a written chart, clapping or tapping them before playing them on the bass. Reading rhythm accurately matters more than reading pitch at this stage.",
+              descriptionUk:
+                "Навчіться читати й рахувати прості ритми з чверток і вісімок за нотним записом, проплескуючи чи простукуючи їх, перш ніж грати на басу. Точне читання ритму на цьому етапі важливіше за читання висоти звуку.",
+            },
+          ],
+        },
+        {
+          slug: "theory",
+          name: "Theory",
+          nameUk: "Теорія",
+          orderIndex: 2,
+          items: [
+            {
+              title: "Movable major scale shape, one position",
+              titleUk: "Рухома форма мажорної гами, одна позиція",
+              description:
+                "Learn a single movable major-scale fingering and how sliding it to a new fret changes the key, without needing to learn a brand-new shape per key.",
+              descriptionUk:
+                "Вивчіть одну рухому аплікатуру мажорної гами і те, як її зсув на новий лад змінює тональність, без потреби вивчати нову форму для кожної тональності.",
+            },
+            {
+              title: "The root-fifth relationship",
+              titleUk: "Зв'язок основний тон-квінта",
+              description:
+                "The 5th is the most stable, consonant note relative to any root, which is why root-fifth patterns are the backbone of beginner and advanced basslines alike. Learn its shape from each string.",
+              descriptionUk:
+                "Квінта — найстабільніший, найбільш консонантний тон відносно будь-якого основного тону, тому патерни основний тон-квінта є основою як басліній початківця, так і досвідченого гравця. Вивчіть її форму від кожної струни.",
+              longDescription:
+                "The interval of a perfect fifth (7 semitones, or 3.5 whole steps) is the most consonant interval after the octave — it's the same relationship a guitar or bass's open strings are tuned close to, and the same one that makes power chords sound 'strong' rather than colored major or minor. That's exactly why it works so reliably under almost any chord: playing the root and 5th together (or one after the other in a bassline) never clashes with a chord's quality, whether it's major, minor, or something more complex, because the 5th itself doesn't state major or minor — only the 3rd does that.\n\nOn bass, the root-fifth shape has one consistent fingering regardless of which string the root sits on: from the root, the 5th is always two frets up and one string over (toward the higher-pitched strings), except when crossing from the G to a hypothetical higher string, which most 4-string basses don't have — so in practice, this one shape is reliable across the E, A, and D strings.\n\nPractice it by picking any root note, finding its 5th using that shape, and alternating between them in steady quarter notes — then try it from a different starting string and confirm the same finger-shape distance holds. That consistency is what makes root-fifth the fastest reliable groove a beginner can build under any chord progression.",
+              longDescriptionUk:
+                "Інтервал чистої квінти (7 півтонів, або 3,5 цілих тони) — найбільш консонантний інтервал після октави: саме на такому співвідношенні (близькому до нього) налаштовані відкриті струни гітари чи баса, і саме він робить павер-акорди «сильними», а не забарвленими в мажор чи мінор. Саме тому квінта настільки надійно працює майже під будь-яким акордом: гра основного тону й квінти разом (чи по черзі в баслінії) ніколи не конфліктує з якістю акорду, будь то мажор, мінор чи щось складніше, адже сама квінта не визначає мажор чи мінор — це робить лише терція.\n\nНа басу форма основний тон-квінта має стабільну аплікатуру незалежно від того, на якій струні лежить основний тон: від основного тону квінта завжди на два лади вище й на одну струну далі (у бік вищих за звучанням струн), за винятком переходу зі струни G на гіпотетичну вищу струну, якої більшість 4-струнних басів не мають — тож на практиці ця одна форма надійно працює на струнах E, A і D.\n\nВідпрацюйте це так: оберіть будь-який основний тон, знайдіть його квінту за цією формою й чергуйте їх рівними чвертками — потім спробуйте від іншої початкової струни й переконайтеся, що та сама відстань форми зберігається. Саме ця стабільність робить основний тон-квінту найшвидшим надійним грувом, який початківець може побудувати під будь-яку акордову послідовність.",
+            },
+            {
+              title: "Recognizing a simple I-IV-V progression from a chord chart",
+              titleUk: "Розпізнавання простої послідовності I-IV-V за акордовим чартом",
+              description:
+                "The vast majority of simple songs use just three chords built on the 1st, 4th, and 5th degrees of a key. Spotting this pattern on a chart tells you which three root notes you'll need before you even start playing.",
+              descriptionUk:
+                "Переважна більшість простих пісень використовують лише три акорди, побудовані на 1-му, 4-му та 5-му ступенях тональності. Розпізнавання цього патерну в чарті одразу підказує, які три основні тони знадобляться, ще до початку гри.",
+            },
+          ],
+        },
+        {
+          slug: "applied",
+          name: "Applied",
+          nameUk: "Застосування",
+          orderIndex: 3,
+          dailyMinMinutes: 10,
+          dailyMaxMinutes: 15,
+          items: [
+            {
+              title: "Play a root-fifth bassline along with a simple song",
+              titleUk: "Грайте баслінію основний тон-квінта разом із простою піснею",
+              description:
+                "Find a slow, simple song, work out its chord progression, and play a root-fifth pattern along with the recording from start to finish. Completing a full song, even a short one, is a real milestone.",
+              descriptionUk:
+                "Знайдіть повільну просту пісню, визначте її акордову послідовність і грайте патерн основний тон-квінта разом із записом від початку до кінця. Завершення цілої пісні, навіть короткої, — це справжня віха.",
+            },
+            {
+              title: "Play along with 2-3 real songs using just roots",
+              titleUk: "Грайте разом із 2-3 реальними піснями, використовуючи лише основні тони",
+              description:
+                "Repeat the root-note-only approach across a small handful of real songs in different keys, focused on staying exactly in time from start to finish without needing to stop and restart.",
+              descriptionUk:
+                "Повторіть підхід «лише основні тони» на кількох реальних піснях у різних тональностях, зосереджуючись на тому, щоб точно тримати темп від початку до кінця без потреби зупинятися й починати заново.",
+            },
+          ],
+        },
+        {
+          slug: "ear_training",
+          name: "Ear training",
+          nameUk: "Тренування слуху",
+          orderIndex: 4,
+          dailyMinMinutes: 5,
+          dailyMaxMinutes: 5,
+          items: [
+            {
+              title: "Recognize root movement in a simple recorded song",
+              titleUk: "Розпізнавайте рух основного тону в простій записаній пісні",
+              description:
+                "Listen to a real song's verse and try to hum or tap along with just the bass note under each chord, checking your answer against a chart or tab afterward.",
+              descriptionUk:
+                "Слухайте куплет реальної пісні й намагайтеся наспівувати чи простукувати лише басову ноту під кожним акордом, звіряючи відповідь із чартом чи табулатурою після цього.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      orderIndex: 0,
+      isOngoing: true,
+      title: "Ongoing Habits",
+      titleUk: "Постійні звички",
+      goal: "Habits that run across every phase, all year, independent of where you are in the plan.",
+      goalUk:
+        "Звички, що діють протягом усіх етапів, увесь рік, незалежно від того, на якому етапі плану ви перебуваєте.",
+      categories: [
+        {
+          slug: "metronome",
+          name: "Metronome Tracking",
+          nameUk: "Відстеження темпу метрономом",
+          orderIndex: 1,
+          items: [
+            {
+              title: "Track tempo, not just repetitions",
+              titleUk: "Відстежуйте темп, а не лише кількість повторень",
+              description:
+                "Note the exact BPM you can play a groove cleanly at, and revisit it every couple of weeks to see it climb. A small, steady BPM increase over time is concrete proof of progress.",
+              descriptionUk:
+                "Записуйте точний темп (уд/хв), на якому ви можете чисто зіграти грув, і переглядайте його раз на кілька тижнів, спостерігаючи за зростанням. Невелике, стабільне підвищення темпу з часом — конкретне підтвердження прогресу.",
+            },
+          ],
+        },
+        {
+          slug: "practice_log",
+          name: "Practice Log",
+          nameUk: "Щоденник практики",
+          orderIndex: 2,
+          items: [
+            {
+              title: "One line per session",
+              titleUk: "Один рядок за заняття",
+              description:
+                "What you worked on, one small win, one specific struggle is enough. Read back through a month of entries occasionally; patterns in what keeps showing up as 'struggle' tell you where to spend more deliberate time.",
+              descriptionUk:
+                "Достатньо того, над чим працювали, одного маленького успіху й однієї конкретної труднощі. Час від часу перечитуйте записи за місяць; патерни в тому, що постійно повторюється як «труднощі», підказують, де варто приділити більше свідомої уваги.",
+            },
+          ],
+        },
+        {
+          slug: "review",
+          name: "Revisit Old Material",
+          nameUk: "Повернення до старого матеріалу",
+          orderIndex: 3,
+          items: [
+            {
+              title: "Periodic review without warm-up",
+              titleUk: "Періодичний перегляд без розминки",
+              description:
+                "Every couple of weeks, replay something from an earlier phase without warming up on it first. If it's shaky, that's useful information — it means the skill needs occasional maintenance reps, not that you failed to learn it.",
+              descriptionUk:
+                "Раз на кілька тижнів переграйте щось із попереднього етапу без попередньої розминки. Якщо виходить нестабільно — це корисна інформація: навичка потребує періодичних підтримуючих повторень, а не свідчення того, що ви її не вивчили.",
+            },
+          ],
+        },
+        {
+          slug: "repertoire",
+          name: "Real Music Alongside Drills",
+          nameUk: "Реальна музика поряд із вправами",
+          orderIndex: 4,
+          items: [
+            {
+              title: "Learn at least one real bassline per month",
+              titleUk: "Вивчайте щонайменше одну реальну баслінію на місяць",
+              description:
+                "Pick a simple, well-known song's bassline within reach of your current skill, even a partial or simplified version. Real music is what keeps motivation alive between the more repetitive technical drills.",
+              descriptionUk:
+                "Оберіть просту, відому баслінію в межах вашого поточного рівня, навіть часткову чи спрощену версію. Реальна музика підтримує мотивацію між більш повторюваними технічними вправами.",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 async function seedInstrumentPlan(planData: {
   instrument: { slug: string; name: string; nameUk: string };
   plan: { title: string; titleUk: string; description: string; descriptionUk: string };
@@ -2315,6 +3349,8 @@ async function seed() {
   await seedInstrumentPlan(pianoPlan);
   await seedInstrumentPlan(beginnerGuitarPlan);
   await seedInstrumentPlan(beginnerPianoPlan);
+  await seedInstrumentPlan(bassPlan);
+  await seedInstrumentPlan(beginnerBassPlan);
   console.log("Seed complete.");
 }
 
